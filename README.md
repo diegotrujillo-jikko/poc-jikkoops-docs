@@ -7,7 +7,7 @@ JikkoOps is a **modular, cloud-based back-office platform** that enables municip
 ✅ **Commercialize digital services**: Create and sell government services as customizable plans  
 ✅ **Control feature activation**: Enable/disable functionality per client without code deployment  
 ✅ **Monetize flexibly**: Support caute pricing, revenue share, per-user, per-transaction, and hybrid models  
-✅ **Integrate seamlessly**: Orchestrate liquidation (CILIN), documents (DOS), citizen services (SOCIA), and payment systems  
+✅ **Integrate seamlessly**: Orchestrate liquidation (SILIN), documents (DOCS), citizen services (SOCIA), and payment systems  
 ✅ **Maintain compliance**: Immutable audit logs, encrypted data, granular role-based access  
 
 **In short**: JikkoOps lets you **package government services into products, sell them as plans, and charge different customers different prices** — all while maintaining complete audit trails.
@@ -22,7 +22,7 @@ JikkoOps is a **modular, cloud-based back-office platform** that enables municip
                        |
         ┌──────────┬───┴────┬────────┐
         |          |        |        |
-      CILIN      DOS     SOCIA     IAM
+      SILIN      DOCS     SOCIA     IAM
     (Liquidation)(Docs) (Citizens)(Auth)
         |          |        |        |
         └──────────┴────┬───┴────────┘
@@ -266,7 +266,7 @@ When adding features or modifying JikkoOps:
 | **Escalado** | Automatic promotion when customer exceeds a limit (e.g., caute → percentage) |
 | **Caute** | "Trust, pay later" pricing model |
 | **Entitlement** | What a customer is authorized to use (Plan + Flags) |
-| **SIGIA** | Larger ecosystem: CILIN, DOS, SOCIA, IAM, JikkoOps |
+| **SIGIA** | Larger ecosystem: SILIN, DOCS, SOCIA, IAM, JikkoOps |
 | **Revenue Model** | Formula for charging (%, per user, per expedient, hybrid, etc.) |
 
 ---

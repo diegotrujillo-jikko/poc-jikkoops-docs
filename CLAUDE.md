@@ -9,7 +9,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Commercialize services**: Create, manage, and sell digital government services as customizable plans
 - **Control access**: Use Protected Resources and feature flags to activate/deactivate functionality by tenant and plan
 - **Monetize flexibly**: Support multiple revenue models (caute, percentage, per-user, per-expedient, hybrid)
-- **Integrate seamlessly**: Sync with CILIN (liquidation), DOS (documents), SOCIA (citizen services), and external systems
+- **Integrate seamlessly**: Sync with SILIN (liquidation), DOCS (documents), SOCIA (citizen services), and external systems
 - **Audit comprehensively**: Maintain immutable logs of all changes for compliance
 
 ## Architecture at a Glance
@@ -24,8 +24,8 @@ JikkoOps API (REST)
     └─→ Tenant Entitlements (what each client has)
     ↓
 DB (PostgreSQL per tenant) + Cache (Redis) + Message Queue (Events)
-    ├─→ CILIN (liquidation integration)
-    ├─→ DOS (document management integration)
+    ├─→ SILIN (liquidation integration)
+    ├─→ DOCS (document management integration)
     ├─→ SOCIA (citizen services integration)
     └─→ External webhooks
 ```
@@ -104,7 +104,7 @@ A Plan is a combination of:
 - Revenue model (caute, %, users, etc.)
 - Límites (users, expedients/month, storage)
 
-**Example**: "Plan Estándar" = CILIN + DOS, 50 users, $X/month
+**Example**: "Plan Estándar" = SILIN + DOCS, 50 users, $X/month
 
 ### 4. **Tenant** (Instancia de Cliente)
 
@@ -126,7 +126,7 @@ One **Entity** (municipio) → One or more **Tenants** (instances in JikkoOps) �
 - Language: Python (FastAPI) or Node.js (Express/NestJS)
 - Database: PostgreSQL (one DB per tenant)
 - Cache: Redis (3-tier: browser, API gateway, application)
-- Events: Kafka or RabbitMQ (pub/sub for CILIN, DOS, SOCIA sync)
+- Events: Kafka or RabbitMQ (pub/sub for SILIN, DOCS, SOCIA sync)
 - Auth: JWT + OAuth2 (OIDC for SIGIA integration)
 - Frontend: React (if UI in JikkoOps, else headless API)
 
@@ -204,7 +204,7 @@ JikkoOps uses feature flags to control:
 1. **Revenue calculations**: Multiple models, edge cases (limits, minimums, caps)
 2. **Flag sync**: When contract activates, when escalado triggers, manual changes
 3. **Tenant isolation**: Ensure data from one tenant never leaks to another
-4. **Integrations**: Events to CILIN, DOS, SOCIA sync correctly
+4. **Integrations**: Events to SILIN, DOCS, SOCIA sync correctly
 
 **Run before shipping**:
 ```bash

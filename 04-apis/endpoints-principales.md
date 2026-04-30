@@ -1,521 +1,281 @@
-# Endpoints Principales de JikkoOps
-
-## Base URL
-
-```
-https://api.jikkoops.internal/v1
-```
+# Endpoints Principales - API REST de JikkoOps
 
 ## Autenticación
 
 Todos los endpoints requieren:
+- **Header**: `Authorization: Bearer {JWT_TOKEN}`
+- **Header**: `X-Tenant-ID: {TENANT_UUID}`
+- Endpoints críticos: Requieren **MFA** adicional
+
+## Clientes (Entidades)
+
+### Listar Clientes
 ```
-Authorization: Bearer {JWT_TOKEN}
-X-Tenant-ID: {tenant_id}
-```
-
-## 1. Gestión de Productos
-
-### Listar Productos
-
-```
-GET /products
-Query params:
-  ├── estado: ['activo', 'deprecated'] (opcional)
-  ├── limit: 20 (default)
-  └── offset: 0 (default)
-
-Response:
-{
-    "productos": [
-        {
-            "id": "uuid",
-            "nombre": "Liquidación Básica",
-            "descripcion": "Módulo de liquidación con funcionalidades básicas",
-            "funcionalidades": ["liquidacion", "reportes_basicos"],
-            "protected_resources": ["LIQ-001", "LIQ-004"],
-            "estado": "activo",
-            "fecha_creacion": "2026-01-01T00:00:00Z"
-        }
-    ],
-    "total": 5,
-    "limit": 20,
-    "offset": 0
-}
+GET /v1/clientes
+Parámetros: page, limit, estado, region
+Respuesta: [{ id, nombre, nit, tipo, estado }]
 ```
 
-### Obtener Producto
-
+### Obtener Cliente
 ```
-GET /products/{product_id}
-
-Response:
-{
-    "id": "uuid",
-    "nombre": "Liquidación Básica",
-    ... (full product data)
-}
+GET /v1/clientes/{cliente_id}
+Respuesta: { id, nombre, nit, tipo, region, email, estado, fecha_creacion }
 ```
 
-## 2. Gestión de Plans
-
-### Listar Plans
-
+### Crear Cliente
 ```
-GET /plans
-Query params:
-  ├── producto_id: uuid (opcional - filtrar por producto)
-  ├── estado: ['activo', 'deprecated']
-  └── limit: 20
-
-Response:
-{
-    "planes": [
-        {
-            "id": "uuid",
-            "nombre": "Plan Básico",
-            "producto_id": "uuid",
-            "funcionalidades": ["liquidacion"],
-            "protected_resources": ["LIQ-001", "LIQ-004"],
-            "usuario_limite": 50,
-            "expediente_limite_mes": 1000,
-            "modelo_revenue": {
-                "tipo": "CAUTE",
-                "periodo_caute_dias": 180
-            },
-            "estado": "activo"
-        }
-    ],
-    "total": 3
-}
+POST /v1/clientes
+Body: { nombre, nit, tipo, region, email, telefono, direccion }
+Respuesta: { id, ... }
 ```
 
-### Obtener Plan
+## Tenants
 
+### Listar Tenants
 ```
-GET /plans/{plan_id}
-
-Response: (plan completo con detalles)
-```
-
-## 3. Gestión de Tenants
-
-### Listar Tenants (admin)
-
-```
-GET /admin/tenants
-Headers: Authorization: Bearer {ADMIN_TOKEN}
-
-Query:
-  ├── entity_id: uuid (opcional)
-  ├── estado: ['activo', 'inactivo']
-  ├── limit: 20
-  └── search: "cali" (busca en nombre técnico)
-
-Response:
-{
-    "tenants": [
-        {
-            "id": "uuid",
-            "entity_id": "uuid",
-            "nombre_tecnico": "municipio_cali",
-            "plan_id": "uuid",
-            "usuarios_limite": 50,
-            "expedientes_mes_limite": 1000,
-            "estado": "activo",
-            "fecha_activacion": "2026-01-15",
-            "fecha_vencimiento": "2027-01-15"
-        }
-    ],
-    "total": 15
-}
+GET /v1/tenants
+Parámetros: entity_id, estado
+Respuesta: [{ id, entity_id, nombre_tecnico, plan_id, estado }]
 ```
 
-### Obtener Configuración del Tenant (self)
-
+### Crear Tenant
 ```
-GET /tenant/config
-
-Response:
-{
-    "tenant_id": "cali-2026",
-    "nombre": "Municipio de Cali",
-    "plan": {
-        "id": "uuid",
-        "nombre": "Plan Estándar"
-    },
-    "usuarios_limite": 50,
-    "usuarios_activos": 42,
-    "expedientes_mes_limite": 1000,
-    "expedientes_mes_actual": 450,
-    "modulo_revenue": {
-        "tipo": "CAUTE",
-        "estado": "activo",
-        "limite_caute_expedientes": 1000,
-        "limite_caute_fecha_vencimiento": "2026-06-15"
-    },
-    "fecha_vencimiento_contrato": "2027-01-15"
-}
+POST /v1/tenants
+Body: { entity_id, nombre_tecnico, plan_id, usuarios_limite, expedientes_limite_mes }
+Respuesta: { id, ... }
 ```
 
-## 4. Gestión de Feature Flags
-
-### Obtener Flags del Tenant
-
+### Configurar Tenant
 ```
-GET /tenant/flags
-Query:
-  ├── modulo: ['CILIN', 'DOS', 'SOCIA'] (opcional)
-  └── estado: ['activo', 'inactivo'] (opcional)
-
-Response:
-{
-    "flags": [
-        {
-            "codigo": "LIQ-001",
-            "nombre": "Botón Liquidar",
-            "tipo": "button",
-            "modulo": "CILIN",
-            "activo": true,
-            "fecha_activacion": "2026-01-15T10:30:00Z",
-            "razon": "Plan Estándar"
-        },
-        {
-            "codigo": "SOC-001",
-            "nombre": "Notificación Manual",
-            "tipo": "action",
-            "modulo": "SOCIA",
-            "activo": false,
-            "razon": "No incluido en plan"
-        }
-    ],
-    "total": 42
-}
+PUT /v1/tenants/{tenant_id}
+Body: { plan_id, usuarios_limite, estado }
+Respuesta: { id, ... actualizado ... }
 ```
 
-### Obtener Flag Específico
+## Contratos
 
+### Listar Contratos
 ```
-GET /tenant/flags/{codigo_recurso}
-
-Response:
-{
-    "codigo": "LIQ-001",
-    "nombre": "Botón Liquidar",
-    "activo": true,
-    "tipo": "button",
-    "modulo": "CILIN",
-    "criticidad": "critica",
-    "fecha_activacion": "2026-01-15T10:30:00Z",
-    "feature": "Liquidación",
-    "en_plan": true
-}
+GET /v1/contratos
+Parámetros: tenant_id, estado, fecha_inicio, fecha_fin
+Respuesta: [{ id, tenant_id, numero, estado, valor_total_cop, fecha_vencimiento }]
 ```
 
-## 5. Sincronización con Módulos
-
-### Reportar Expediente Procesado (desde CILIN)
-
+### Obtener Contrato
 ```
-POST /sync/expedient-processed
-
-Headers:
-  └── X-Module-Secret: {secret_cilin}
-
-Body:
-{
-    "tenant_id": "cali-2026",
-    "expediente_id": "EXP-2026-001234",
-    "fecha_procesamiento": "2026-04-29T14:30:00Z",
-    "tipo": "liquidacion",
-    "monto_liquidado": 150000,
-    "estado": "completado"
-}
-
-Response:
-{
-    "expediente_registrado": true,
-    "contador_mes": 451,
-    "limite_mes": 1000,
-    "superado_limite": false,
-    "cambio_de_modelo": false
-}
+GET /v1/contratos/{contrato_id}
+Respuesta: { id, tenant_id, numero, modelo_revenue, servicios, estado, ... }
 ```
 
-### Reportar Escalado de Volumen
-
+### Crear Contrato
 ```
-POST /sync/escalado-volumen
-
-Headers:
-  └── X-Module-Secret: {secret}
-
-Body:
-{
-    "tenant_id": "cali-2026",
-    "evento": "caute_completado",
-    "expedientes_procesados": 1050,
-    "limite_caute": 1000,
-    "nuevo_modelo": "CAUTE_THEN_PERCENTAGE",
-    "porcentaje_recaudo": 0.10
-}
-
-Response:
-{
-    "escalado_aplicado": true,
-    "flags_actualizados": ["SOC-002", "REP-002"],
-    "notificacion_enviada": true,
-    "fecha_efectiva": "2026-04-30T00:00:00Z"
-}
+POST /v1/contratos
+Body: { tenant_id, numero, fecha_firma, servicios, modelo_revenue, valor_total_cop }
+Respuesta: { id, ... }
 ```
 
-## 6. Facturas
+### Actualizar Modelo de Pricing ⭐ REQUIERE MFA
+```
+PUT /v1/contratos/{contrato_id}/modelo-ingresos
+Requiere: MFA code + credentials
+Body: { modelo_revenue, valor_total_cop, justificacion }
+Respuesta: { id, modelo_revenue, audit_log_id }
+```
+
+## Feature Flags
+
+### Listar Flags
+```
+GET /v1/feature-flags
+Parámetros: tenant_id, recurso_protegido_id, activo
+Respuesta: [{ id, tenant_id, recurso_codigo, activo, fecha_activacion }]
+```
+
+### Cambiar Flag ⭐ REQUIERE MFA
+```
+PUT /v1/feature-flags/{flag_id}
+Requiere: MFA code + credentials
+Body: { activo, razon }
+Respuesta: { id, activo, fecha_actualizacion }
+```
+
+### Activar Flag en Bulk
+```
+POST /v1/feature-flags/bulk
+Requiere: MFA code
+Body: { tenant_id, flags: [{ recurso_id, activo }], razon }
+Respuesta: { count, results: [...] }
+```
+
+## Facturas
 
 ### Listar Facturas
-
 ```
-GET /invoices
-Query:
-  ├── estado: ['emitida', 'pagada', 'vencida']
-  ├── fecha_desde: YYYY-MM-DD
-  ├── fecha_hasta: YYYY-MM-DD
-  ├── limit: 20
-  └── offset: 0
-
-Response:
-{
-    "facturas": [
-        {
-            "id": "uuid",
-            "numero_factura": "FACT-2026-04-CALI",
-            "periodo_inicio": "2026-04-01",
-            "periodo_fin": "2026-04-30",
-            "fecha_emision": "2026-05-01",
-            "fecha_vencimiento": "2026-05-15",
-            "estado": "emitida",
-            "total": 125000,
-            "iva": 23750,
-            "subtotal": 101250,
-            "lineas": [
-                {
-                    "descripcion": "Expedientes procesados (450 x $200)",
-                    "cantidad": 450,
-                    "precio_unitario": 200,
-                    "subtotal": 90000,
-                    "origen": "expediente"
-                }
-            ]
-        }
-    ],
-    "total": 5
-}
+GET /v1/facturas
+Parámetros: tenant_id, estado, periodo_inicio, periodo_fin
+Respuesta: [{ id, numero_factura, estado, total, fecha_emision }]
 ```
 
 ### Obtener Factura
-
 ```
-GET /invoices/{invoice_id}
-
-Response: (factura completa)
+GET /v1/facturas/{factura_id}
+Respuesta: { id, numero_factura, lineas, subtotal, iva, total, estado }
 ```
 
-### Descargar PDF de Factura
-
+### Generar Factura
 ```
-GET /invoices/{invoice_id}/pdf
-
-Response: [PDF binary]
+POST /v1/facturas
+Body: { tenant_id, periodo_inicio, periodo_fin, modelo_revenue }
+Respuesta: { id, numero_factura, total, estado: 'borrador' }
 ```
 
-## 7. Contratos
-
-### Listar Contratos
-
+### Emitir Factura
 ```
-GET /admin/contracts
-Query:
-  ├── tenant_id: uuid
-  ├── estado: ['activo', 'vencido', 'cancelado']
-  ├── limit: 20
-  └── offset: 0
+POST /v1/facturas/{factura_id}/emitir
+Requiere: MFA code (factura >$100K)
+Respuesta: { id, numero_factura, estado: 'emitida' }
+```
 
-Response:
-{
-    "contratos": [
-        {
-            "id": "uuid",
-            "numero": "CONTRATO-2026-CALI-001",
-            "tenant_id": "uuid",
-            "fecha_firma": "2026-01-15",
-            "fecha_inicio": "2026-01-15",
-            "fecha_vencimiento": "2027-01-15",
-            "estado": "activo",
-            "servicios": ["CILIN", "DOS"],
-            "modelo_revenue": {
-                "tipo": "CAUTE",
-                "periodo_caute_dias": 180
-            },
-            "valor_total_cop": 0,
-            "forma_pago": "transferencia"
-        }
-    ],
-    "total": 3
+### Anular Factura ⭐ REQUIERE MFA
+```
+DELETE /v1/facturas/{factura_id}
+Requiere: MFA code + justificacion
+Body: { motivo }
+Respuesta: { id, estado: 'anulada', audit_log_id }
+```
+
+## Recursos Protegidos
+
+### Listar Recursos
+```
+GET /v1/recursos-protegidos
+Parámetros: modulo, criticidad, estado
+Respuesta: [{ id, codigo, nombre, tipo, modulo, criticidad }]
+```
+
+### Obtener Recurso
+```
+GET /v1/recursos-protegidos/{recurso_id}
+Respuesta: { id, codigo, nombre, dependencias, estado, funcionalidad_id }
+```
+
+### Crear Recurso
+```
+POST /v1/recursos-protegidos
+Body: { codigo, nombre, tipo, modulo, descripcion, criticidad }
+Respuesta: { id, codigo, estado: 'huerfano' }
+```
+
+### Agrupar Recurso a Funcionalidad
+```
+PUT /v1/recursos-protegidos/{recurso_id}/funcionalidad
+Body: { funcionalidad_id }
+Respuesta: { id, estado: 'activo', funcionalidad_id }
+```
+
+## Plans
+
+### Listar Plans
+```
+GET /v1/planes
+Parámetros: producto_id, estado
+Respuesta: [{ id, nombre, producto_id, usuario_limite, modelo_revenue }]
+```
+
+### Obtener Plan
+```
+GET /v1/planes/{plan_id}
+Respuesta: { id, nombre, producto_id, funcionalidades, recursos_protegidos, modelo_revenue }
+```
+
+### Crear Plan
+```
+POST /v1/planes
+Body: { nombre, producto_id, funcionalidades, modelo_revenue, usuario_limite }
+Respuesta: { id, ... }
+```
+
+## Métricas (SDK Metrics)
+
+### Registrar Métrica
+```
+POST /v1/metricas
+Body: { 
+  resource_id: "LIQ-001",
+  execution_time_ms: 245,
+  tokens_used: 150,
+  cost_usd: 0.0045,
+  success: true
+}
+Respuesta: { id, timestamp }
+```
+
+### Obtener Métricas
+```
+GET /v1/metricas
+Parámetros: resource_id, tenant_id, fecha_inicio, fecha_fin
+Respuesta: [{ resource_id, execution_time_ms, tokens_used, cost_usd }]
+```
+
+### Dashboard de Costos
+```
+GET /v1/metricas/dashboard?periodo=mes
+Respuesta: {
+  total_cost_usd: 1234.56,
+  por_recurso: [{ resource_id, cost_usd, count }],
+  promedio_tiempo_ms: 125
 }
 ```
 
-### Crear Contrato (admin)
+## Auditoría
 
+### Obtener Audit Log
 ```
-POST /admin/contracts
-
-Body:
-{
-    "tenant_id": "uuid",
-    "numero": "CONTRATO-2026-CALI-002",
-    "fecha_firma": "2026-04-29",
-    "fecha_inicio": "2026-05-01",
-    "fecha_vencimiento": "2027-05-01",
-    "plan_id": "uuid",
-    "servicios": ["CILIN", "DOS", "SOCIA"],
-    "modelo_revenue": {
-        "tipo": "PERCENTAGE_REVENUE",
-        "porcentaje": 0.10,
-        "minimo_mensual": 50000
-    },
-    "forma_pago": "transferencia"
-}
-
-Response:
-{
-    "id": "uuid",
-    "numero": "CONTRATO-2026-CALI-002",
-    "estado": "borrador",
-    "mensaje": "Contrato creado. Siguiente: firma y activación"
-}
+GET /v1/audit-log
+Parámetros: tenant_id, tabla_afectada, fecha_inicio, fecha_fin
+Respuesta: [{ 
+  id, tabla, registro_id, operacion, 
+  valores_anterior, valores_nuevo, 
+  usuario_id, timestamp 
+}]
 ```
 
-### Activar Contrato
+## Códigos de Estado
 
-```
-POST /admin/contracts/{contract_id}/activate
-
-Body:
-{
-    "razon": "Firma completada y cliente aprobó"
-}
-
-Response:
-{
-    "contrato_id": "uuid",
-    "estado": "activo",
-    "flags_actualizados": 18,
-    "tenant_notificado": true,
-    "fecha_efectiva": "2026-04-29T15:30:00Z"
-}
-```
-
-## 8. Protected Resources (Admin)
-
-### Listar Recursos Protegidos
-
-```
-GET /admin/protected-resources
-Query:
-  ├── modulo: ['CILIN', 'DOS', 'SOCIA']
-  ├── tipo: ['button', 'endpoint', 'view', 'action']
-  ├── estado: ['activo', 'huerfano', 'deprecated']
-  ├── feature_id: uuid (opcional)
-  └── limit: 50
-
-Response:
-{
-    "recursos": [
-        {
-            "id": "uuid",
-            "codigo": "LIQ-001",
-            "nombre": "Botón Liquidar",
-            "tipo": "button",
-            "modulo": "CILIN",
-            "feature_id": "uuid",
-            "feature_nombre": "Liquidación",
-            "criticidad": "critica",
-            "estado": "activo",
-            "dependencias": ["LIQ-002"],
-            "fecha_creacion": "2026-01-01"
-        }
-    ],
-    "total": 42,
-    "huerfanos": 2
-}
-```
-
-### Agrupar Recursos Huérfanos a Funcionalidad
-
-```
-POST /admin/protected-resources/{codigo}/assign-feature
-
-Body:
-{
-    "feature_id": "uuid",
-    "razon": "Nuevo recurso agregado en deploy"
-}
-
-Response:
-{
-    "codigo": "DOC-005",
-    "feature_asignada": "Gestión de Documentos",
-    "estado": "activo"
-}
-```
-
-## Error Responses
-
-Todos los endpoints usan formato estándar de error:
-
-```json
-{
-    "error": {
-        "codigo": "INVALID_TENANT",
-        "mensaje": "Tenant 'xyz' no encontrado",
-        "detalles": {
-            "tenant_id": "xyz",
-            "causa": "El tenant ha sido cancelado"
-        },
-        "timestamp": "2026-04-29T14:30:00Z",
-        "request_id": "req-12345"
-    }
-}
-```
+| Código | Significado |
+|--------|-------------|
+| 200 | OK - Solicitud exitosa |
+| 201 | Created - Recurso creado |
+| 400 | Bad Request - Parámetros inválidos |
+| 401 | Unauthorized - Token ausente o inválido |
+| 403 | Forbidden - Acceso denegado / MFA requerida |
+| 404 | Not Found - Recurso no existe |
+| 409 | Conflict - Recurso duplicado |
+| 422 | Unprocessable Entity - Validación fallida |
+| 429 | Too Many Requests - Rate limit excedido |
+| 500 | Internal Server Error - Error del servidor |
 
 ## Rate Limiting
 
+- **Límite estándar**: 1000 requests/hora por tenant
+- **Límite crítico**: 100 requests/hora para DELETE y PUT con MFA
+- **Header**: `X-RateLimit-Remaining: 999`
+
+## Errores Estándar
+
+```json
+{
+  "status": "error",
+  "code": "VALIDATION_ERROR",
+  "message": "Descripción del error en español",
+  "details": {
+    "field": "nombre",
+    "reason": "requerido"
+  },
+  "timestamp": "2026-04-30T12:00:00Z"
+}
 ```
-Límites:
-├── Por IP: 1000 requests/minuto
-├── Por tenant: 500 requests/minuto
-└── Por usuario: 100 requests/minuto
 
-Response headers:
-├── X-RateLimit-Limit: 1000
-├── X-RateLimit-Remaining: 876
-└── X-RateLimit-Reset: 1619685600
+---
 
-Si se excede:
-└── HTTP 429 Too Many Requests
-```
-
-## Webhooks
-
-JikkoOps puede enviar eventos a webhooks configurados:
-
-```
-Eventos:
-├── contract.activated
-├── escalado_volumen.detectado
-├── flags.changed
-├── invoice.created
-├── invoice.paid
-└── tenant.vencimiento_cercano (30 días antes)
-
-Configurar en: /admin/tenants/{id}/webhooks
-```
+**Versión**: 1.0 | **Actualizado**: 2026-04-30

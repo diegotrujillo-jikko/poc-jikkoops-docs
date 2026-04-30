@@ -1,280 +1,225 @@
-# JikkoOps - Modular Back-Office for Intelligent Governance
+# JikkoOps - Sistema Integral de Back-Office Comercial
 
-## What is JikkoOps?
+**JikkoOps** es el back-office comercial y operativo del ecosistema **SIGIA** (Sistema de Gestión Integral Administrativo) para municipios, gobernaciones y entidades públicas colombianas.
 
-JikkoOps is a **modular, cloud-based back-office platform** that enables municipalities, gobernaciones, and public entities in Colombia to:
+## 🎯 ¿Qué es JikkoOps?
 
-✅ **Commercialize digital services**: Create and sell government services as customizable plans  
-✅ **Control feature activation**: Enable/disable functionality per client without code deployment  
-✅ **Monetize flexibly**: Support caute pricing, revenue share, per-user, per-transaction, and hybrid models  
-✅ **Integrate seamlessly**: Orchestrate liquidation (SILIN), documents (DOCS), citizen services (SOCIA), and payment systems  
-✅ **Maintain compliance**: Immutable audit logs, encrypted data, granular role-based access  
+Un sistema modular que permite:
+- **Comercializar servicios digitales** de forma granular (liquidación, documentos, servicio al ciudadano)
+- **Controlar acceso** mediante Protected Resources y Feature Flags
+- **Monetizar flexiblemente** (modelo caute, porcentaje recaudo, por usuario, por expediente, híbrido)
+- **Integrar ecosistema SIGIA** (sincronización bidireccional con CILIN, DOS, SOCIA, IAM)
+- **Auditar exhaustivamente** (logs inmutables por 7 años - requisito fiscal)
+- **Observabilidad completa** (métricas de costo por cada función)
 
-**In short**: JikkoOps lets you **package government services into products, sell them as plans, and charge different customers different prices** — all while maintaining complete audit trails.
-
----
-
-## The JikkoOps Ecosystem
+## 📁 Estructura de Documentación
 
 ```
-                    SIGIA
-              (Intelligent Governance)
-                       |
-        ┌──────────┬───┴────┬────────┐
-        |          |        |        |
-      SILIN      DOCS     SOCIA     IAM
-    (Liquidation)(Docs) (Citizens)(Auth)
-        |          |        |        |
-        └──────────┴────┬───┴────────┘
-                        |
-                   JIKKOOPS
-              (This Back-Office)
-                        |
-         ┌──────┬───────┼──────┬──────┐
-         |      |       |      |      |
-       Plans Products Revenue Tenants Flags
+jikkoops-docs/
+├── 00-general/                    # Documentos generales y transcripciones
+├── 01-arquitectura/               # Diseño del sistema y conceptos
+├── 02-procesos/                   # Procesos de negocio
+├── 03-datos/                      # Capa de datos y modelos
+├── 04-apis/                       # Integración e endpoints REST
+├── 05-modulos-nucleares/          # Módulos core del sistema
+├── 06-riesgos-y-decisiones/       # Riesgos e hitos arquitectónicos
+└── DOCUMENTACION/                 # Archivos maestros de referencia
 ```
 
-**JikkoOps coordinates the back-office**:
-- Defines what services (Plans) are available
-- Decides which customers get which services (Protected Resources + Feature Flags)
-- Calculates what to charge each customer (Revenue Models)
-- Monitors health and escalates when thresholds are hit (Operations)
-- Issues invoices and tracks payments (Billing)
+## 📖 Documentación Principal
+
+### Para Comenzar
+1. **RESUMEN_EJECUTIVO_ES.md** - Visión general en 5 minutos
+2. **INDICE_DOCUMENTACION_ESPANOL.md** - Mapa completo de documentación
+3. **GUIA_DOCUMENTACION_ESPANOL.md** - Conceptos y paradigma BD-first
+
+### Arquitectura
+- **01-arquitectura/vision-general.md** - Visión arquitectónica completa
+- **01-arquitectura/recursos-protegidos.md** - Inventario de funcionalidades
+
+### Procesos de Negocio
+- **02-procesos/flujo-contratos.md** - Ciclo de vida del cliente (prospección → renovación)
+- **02-procesos/modelos-ingresos.md** - Estrategias de monetización
+
+### Base de Datos (⭐ CRÍTICO PARA MER)
+- **03-datos/principios-base-datos.md** - Diseño BD con enfoque iterativo
+- **03-datos/modelo-datos.md** - Esquema de base de datos (10 entidades)
+- **03-datos/sincronizacion-flags.md** - Feature flags en tiempo real
+- **03-datos/estrategia-cache.md** - Caché multi-nivel
+
+### APIs e Integración
+- **04-apis/endpoints-principales.md** - Referencia REST API completa
+- **04-apis/eventos-integracion.md** - Tipos de eventos y webhooks
+
+### Módulos del Sistema
+- **05-modulos-nucleares/dashboard-comercial.md** - Dashboard de ventas y KPIs
+- **05-modulos-nucleares/gestion-contratos.md** - Gestión del ciclo de contratos
+- **05-modulos-nucleares/operaciones.md** - Monitoreo y operaciones
+- **05-modulos-nucleares/facturacion.md** - Billing y facturación
+- **05-modulos-nucleares/configuracion.md** - Configuración global
+
+### Riesgos y Decisiones
+- **06-riesgos-y-decisiones/riesgos-identificados.md** - Matriz de riesgos
+- **06-riesgos-y-decisiones/decisiones-arquitecturales.md** - Por qué cada decisión
+
+## 🔑 Conceptos Clave
+
+### Protected Resources (Recursos Protegidos)
+Inventario exhaustivo de funcionalidades (botones, endpoints, vistas) que pueden activarse/desactivarse por tenant y plan.
+- **Código único**: LIQ-001, DOC-003, SOC-001
+- **Control**: Feature flags en runtime
+- **Auditoría**: Trazabilidad exacta de acceso
+
+### Plans (Ofertas Comerciales)
+Combinaciones de funcionalidades con modelos de pricing flexibles:
+- **Plan Básico**: Liquidación básica, 50 usuarios, $0
+- **Plan Estándar**: Liquidación + Documentos, 100 usuarios, 10% recaudo
+- **Plan Premium**: Todos los módulos, ilimitado, 20% recaudo
+
+### Modelos de Revenue
+- **Caute**: Período gratis N expedientes, luego se cobra
+- **Porcentaje de Recaudo**: % de lo que el cliente recauda
+- **Por Usuario**: $X por usuario/mes
+- **Por Expediente**: $X por expediente procesado
+- **Híbrido**: Combinación de los anteriores
+
+### Tenant (Instancia del Cliente)
+Una entidad (municipio) puede tener múltiples tenants (instancias en JikkoOps), cada uno con:
+- BD independiente
+- Plan asignado
+- Feature flags configurados
+- Contrato específico
+
+## 🚀 Cambio de Paradigma: Enfoque Base-Datos-Primero
+
+### Antes (Alto Riesgo)
+```
+Año 0: BD pequeña (10-20% definida)
+Año 1-2: Agregamos tablas incrementalmente
+Año 3+: Refactorización costosa y riesgosa
+```
+
+### Ahora (Recomendado)
+```
+Día 1: BD fuerte (90% definida) usando IA
+Mes 1-12: Refinamiento iterativo
+Año 2+: BD estable, escalable, mantenible
+```
+
+**Ventaja**: Usar IA para planificación futura es **10x más rápido** que refactorizaciones tardías.
+
+## 📊 Integración de Transcript (2026-04-30)
+
+La documentación integra insights de una reunión de 127 minutos con el equipo:
+
+### Herramientas Clave
+- **Alembic**: Versionamiento automático de BD (migrations reversibles)
+- **ChatGPT**: Validación iterativa de esquemas de BD
+- **Cloud Code**: Generación automática de migrations
+- **MFA**: Autenticación Multi-Factor en endpoints críticos
+- **Playwright**: Testing E2E automatizado
+- **SDK Métricas**: Medición de costo por cada función
+
+### Concepto Principal
+> "La base de datos es el corazón del sistema.
+> Las APIs y UI se adaptan a ella, nunca lo opuesto."
+
+## 🔐 Requisitos de Seguridad
+
+### MFA (Multi-Factor Authentication) - CRÍTICO
+- `POST /liquidaciones` - Crear liquidación
+- `PUT /feature-flags/{id}` - Cambiar activaciones
+- `POST /contracts/{id}/cambiar-modelo` - Modificar pricing
+- `DELETE /invoices/{id}` - Anular factura
+
+**Implementación**: Google Authenticator (TOTP) + validación en backend
+
+### Auditoría Fiscal
+- Logs inmutables por **7 años** (requisito legal)
+- Tabla `audit_log` con: quién, qué, cuándo, valores anterior/nuevo
+- Especialmente crítico para cambios de precios e ingresos
+
+### Encriptación
+- En reposo: AES-256-GCM
+- En tránsito: TLS 1.2+
+- Datos sensibles: contratos, facturas, credenciales
+
+## 📊 8 Casos de Uso Críticos (Para Validar BD)
+
+1. **CU-001**: Crear contrato caute + porcentaje, generar factura
+2. **CU-002**: Escalado automático cuando se supera límite caute
+3. **CU-003**: MFA en liquidación crítica ($50M+)
+4. **CU-004**: Reporte predictivo: "¿Cuánto dinero falta para pagar contratos?"
+5. **CU-005**: Cambiar Protected Resource sin afectar clientes en producción
+6. **CU-006**: Soportar 50M liquidaciones/mes con BD particionada
+7. **CU-007**: Auditoría de 7 años (18.25B registros)
+8. **CU-008**: Multi-tenancy con BD separada por tenant
+
+## 🎯 Próximos Pasos
+
+### Esta Semana
+1. ✅ Documentación en español completada
+2. ⏳ Casos de uso detallados por módulo
+3. ⏳ Iterar BD en ChatGPT hasta 90% completitud
+4. ⏳ Definir Alembic migrations
+
+### Semanas 2-4
+5. ⏳ Implementar MFA en endpoints críticos
+6. ⏳ Configurar SDK Métricas
+7. ⏳ Definir índices y particiones
+8. ⏳ Testing con Playwright
+
+### Meses 1-3
+9. ⏳ Generar ERD/MER (Modelo Entidad-Relación)
+10. ⏳ Documentación de BD lista para desarrollo
+11. ⏳ APIs desarrolladas alrededor de BD
+12. ⏳ UI/UX implementada en paralelo
+13. ⏳ Sistema en producción
+
+## 💻 Desarrollo
+
+### Convenciones de Commit
+Usar conventional commits:
+```
+feat: nueva funcionalidad
+fix: corrección de bug
+docs: cambios en documentación
+refactor: refactorización de código
+test: pruebas
+```
+
+### Ramas
+- `main`: producción
+- `develop`: integración de features
+- `feature/*`: nuevas funcionalidades
+
+### Testing
+- Mínimo 80% de cobertura
+- Tests unitarios, integración y E2E
+- Validación de BD con casos de uso
+
+## 📞 Preguntas Frecuentes
+
+**P: ¿Por dónde comenzar?**  
+A: Lee `RESUMEN_EJECUTIVO_ES.md` (5 min), luego `INDICE_DOCUMENTACION_ESPANOL.md`
+
+**P: ¿Necesitamos interfaz gráfica?**  
+A: No para el MVP. Un chatbot inteligente puede hacer operaciones complejas.
+
+**P: ¿Cuánto toma diseñar la BD al 90%?**  
+A: 2-4 horas iterando con ChatGPT + Cloud Code.
+
+**P: ¿Es obligatorio Alembic?**  
+A: Sí, para auditoría fiscal (requisito legal 7 años).
+
+**P: ¿Cómo validamos que la BD es suficiente?**  
+A: Ejecutar todos los 8 casos de uso contra ella.
+
+## 📄 Licencia
+
+Jikkosoft © 2026 - Todos los derechos reservados
 
 ---
 
-## Documentation Structure
-
-### **Start Here** 👇
-
-| Document | Purpose | Audience |
-|----------|---------|----------|
-| [CLAUDE.md](./CLAUDE.md) | Development guidance for Claude AI | Developers, architects |
-| [01-arquitectura/vision-general.md](./01-arquitectura/vision-general.md) | System overview and key concepts | Everyone |
-| [02-procesos/flujo-contratos.md](./02-procesos/flujo-contratos.md) | How customers move from prospect to paid client | Product, Sales, Operations |
-
-### **Deep Dives**
-
-| Folder | What's Inside |
-|--------|---------------|
-| **01-arquitectura/** | System design, Protected Resources, feature inventory |
-| **02-procesos/** | Contract lifecycle, revenue models, pricing flexibility |
-| **03-datos/** | Database schema, caching strategy, data synchronization |
-| **04-apis/** | REST endpoints, integration events to other modules |
-| **05-modulos-core/** | UI modules: Dashboard, Contracts, Operations, Billing, Configuration |
-| **06-riesgos-decisiones/** | Risk matrix, architectural decisions, trade-offs |
-
-### **Quick Reference**
-
-- **How does billing work?** → [02-procesos/revenue-share-models.md](./02-procesos/revenue-share-models.md)
-- **What's a Protected Resource?** → [01-arquitectura/protected-resources.md](./01-arquitectura/protected-resources.md)
-- **How do feature flags work?** → [03-datos/feature-flags-sync.md](./03-datos/feature-flags-sync.md)
-- **What APIs are available?** → [04-apis/endpoints-principales.md](./04-apis/endpoints-principales.md)
-- **What can go wrong?** → [06-riesgos-decisiones/riesgos-identificados.md](./06-riesgos-decisiones/riesgos-identificados.md)
-
----
-
-## Key Concepts Explained
-
-### **Protected Resources** 🔐
-Every button, endpoint, view, and action is inventoried with a unique code:
-- `LIQ-001`: Liquidation button
-- `DOC-003`: Digital signature
-- `SOC-001`: Notification
-
-Why? So we can **activate/deactivate per customer without touching code**.
-
-### **Plans** 📦
-Bundles of Protected Resources with pricing:
-- **Plan Básico**: Liquidation only, 50 users, free
-- **Plan Estándar**: Liquidation + Documents, 50 users, 10% revenue share
-- **Plan Premium**: All features, unlimited users, 15% revenue share
-
-### **Feature Flags** 🚩
-Controls which Protected Resources are ON/OFF for each customer at runtime:
-- Tied to their Plan (automatic)
-- Adjusted for escalado (when volume limits hit)
-- Changeable manually by operations team
-
-### **Revenue Models** 💰
-How we charge:
-- **CAUTE** ("trust, pay later"): Free until N expedients, then charge % of future revenue
-- **PERCENTAGE_REVENUE**: Always % of collected revenue (10-20%)
-- **PER_USER**: $X per active user per month
-- **PER_EXPEDIENT**: $X per liquidation/transaction
-- **HYBRID**: Any combination
-
----
-
-## Sample Workflow: A New Customer
-
-### Day 1: Prospecting
-- Sales sees opportunity in **G-COPS** (revenue orchestrator)
-- Creates CRM lead for "Municipio Cali"
-
-### Day 5: Proposal
-- Sales proposes **Plan Estándar**: Liquidation + Documents, 50 users, 10% recaudo (revenue)
-- Customer reviews and approves
-
-### Day 10: Contract Activation
-- Manager enters contract in JikkoOps
-- System automatically:
-  - Activates feature flags (LIQ-*, DOC-* = ON)
-  - Creates database for tenant
-  - Sends "welcome" event to CILIN, DOS, SOCIA
-  - Notifies customer with access credentials
-
-### Day 11–180: Usage (Caute Phase)
-- Customer processes 500 liquidations/month → **$0 charge**
-- System tracks: expedients counter, users active, etc.
-
-### Day 181: Escalado (Limit Exceeded)
-- Customer processed 1,050 expedients (exceeds 1,000 caute limit)
-- System automatically:
-  - Flags escalado event
-  - Activates "% recaudo" flags
-  - Notifies customer: "You've exceeded trial limit. Starting revenue share model."
-
-### Day 185–: Billing
-- Monthly, system generates invoice:
-  - Recaudos processed: $1.5M
-  - JikkoOps revenue (10%): $150,000
-  - Sent to customer, customer pays
-
-### Day 365: Renewal
-- Contract expires
-- Operations dashboard alerts: "CALI contract expires in 30 days"
-- Sales reaches out with renewal proposal → Loop back to Day 5
-
----
-
-## Architecture Highlights
-
-### Multi-Tenant by Design
-- Each customer has own PostgreSQL database
-- Complete data isolation
-- Scalable: Distribute tenants across servers
-
-### Event-Driven
-- Changes to flags emit events
-- CILIN, DOS, SOCIA subscribe and react
-- No tight coupling, resilient to failures
-
-### Feature Flags as First-Class Citizen
-- Every feature is a flag
-- Flags stored in DB + Redis cache
-- Change takes effect in <5 seconds (cache TTL)
-
-### Immutable Audit Trail
-- All changes logged (who, when, what, why)
-- Required by Colombian fiscal authorities (7-year retention)
-- Cannot be modified or deleted
-
----
-
-## Technology Stack
-
-**Proposed** (To Be Confirmed):
-
-| Component | Choice | Why |
-|-----------|--------|-----|
-| Backend | Python (FastAPI) or Node.js | Fast, scalable, good for async/events |
-| Database | PostgreSQL (per tenant) | ACID guarantees, JSON support, compliance |
-| Cache | Redis | Multi-level caching, feature flags, sessions |
-| Events | Kafka or RabbitMQ | Pub/sub for module sync, audit trail |
-| Auth | JWT + OAuth2/OIDC | Stateless APIs, SIGIA integration |
-| Frontend | React | (if UI needed; else headless API) |
-| Infrastructure | Docker + Kubernetes | Container orchestration, scaling |
-| Monitoring | Prometheus + Grafana | Alerts, KPIs, uptime tracking |
-
----
-
-## Getting Started
-
-### 1. **Understand the System**
-   - Read [01-arquitectura/vision-general.md](./01-arquitectura/vision-general.md) (15 min)
-   - Read [02-procesos/flujo-contratos.md](./02-procesos/flujo-contratos.md) (20 min)
-
-### 2. **Learn Key Concepts**
-   - Protected Resources: [01-arquitectura/protected-resources.md](./01-arquitectura/protected-resources.md)
-   - Revenue Models: [02-procesos/revenue-share-models.md](./02-procesos/revenue-share-models.md)
-   - Feature Flags: [03-datos/feature-flags-sync.md](./03-datos/feature-flags-sync.md)
-
-### 3. **Explore Architecture**
-   - Data Model: [03-datos/data-model.md](./03-datos/data-model.md)
-   - APIs: [04-apis/endpoints-principales.md](./04-apis/endpoints-principales.md)
-   - Integrations: [04-apis/integration-events.md](./04-apis/integration-events.md)
-
-### 4. **Review Decisions**
-   - Why we chose DB-per-tenant: [06-riesgos-decisiones/decisiones-arquitecturales.md](./06-riesgos-decisiones/decisiones-arquitecturales.md)
-   - What can go wrong: [06-riesgos-decisiones/riesgos-identificados.md](./06-riesgos-decisiones/riesgos-identificados.md)
-
-### 5. **Develop**
-   - Check [CLAUDE.md](./CLAUDE.md) for coding conventions, safe changes, commands
-
----
-
-## FAQs
-
-**Q: Is this a tax/liquidation system?**  
-A: No. JikkoOps is the *back-office* that *manages* access to liquidation (CILIN) and other services. CILIN does the actual tax calculations.
-
-**Q: Why multiple revenue models?**  
-A: Different customers have different payment capability. Some pay upfront, some pay by volume, some by number of users. Flexibility = more sales.
-
-**Q: What happens if CILIN goes down?**  
-A: JikkoOps can't confirm new expedients were processed, so it degrades gracefully (can't generate invoices until CILIN recovers). Cached data keeps the system partly functional.
-
-**Q: How do we prevent fraud in revenue calculations?**  
-A: Code review on all changes, audit logs of calculations, monthly independent validation, no direct SQL modifications to invoice amounts.
-
-**Q: Can a customer see our pricing model?**  
-A: No. Pricing is configured by Operations, stored securely, and only shown to authorized managers. Customers see what they owe, not how we calculated it.
-
----
-
-## Contributing
-
-When adding features or modifying JikkoOps:
-
-1. **Understand the impact**: Which Plans are affected? Which tenants? Which revenue models?
-2. **Follow safe change rules**: Pricing changes need approval. Feature additions need Protected Resource inventory.
-3. **Test thoroughly**: Revenue tests are critical. Integration tests for CILIN/DOS/SOCIA sync.
-4. **Update documentation**: Keep the .md files in sync with code changes.
-5. **Code review**: Especially for revenue, flags, contracts, audit trails.
-
----
-
-## Questions?
-
-- **Architecture questions?** → See [06-riesgos-decisiones/decisiones-arquitecturales.md](./06-riesgos-decisiones/decisiones-arquitecturales.md)
-- **API questions?** → See [04-apis/endpoints-principales.md](./04-apis/endpoints-principales.md)
-- **Operational questions?** → See [05-modulos-core/operacion.md](./05-modulos-core/operacion.md)
-- **Development setup?** → See [CLAUDE.md](./CLAUDE.md)
-
----
-
-## Glossary
-
-| Term | Meaning |
-|------|---------|
-| **Protected Resource** | A feature (button, endpoint, view) with a unique code, activated via flags |
-| **Plan** | A bundle of Protected Resources + pricing model sold to customers |
-| **Tenant** | One customer's instance of JikkoOps (has own DB, flags, entitlements) |
-| **Feature Flag** | ON/OFF switch for a Protected Resource per tenant |
-| **Escalado** | Automatic promotion when customer exceeds a limit (e.g., caute → percentage) |
-| **Caute** | "Trust, pay later" pricing model |
-| **Entitlement** | What a customer is authorized to use (Plan + Flags) |
-| **SIGIA** | Larger ecosystem: SILIN, DOCS, SOCIA, IAM, JikkoOps |
-| **Revenue Model** | Formula for charging (%, per user, per expedient, hybrid, etc.) |
-
----
-
-## License & Attribution
-
-**Jikkosoft Internal Use Only**
-
-Created for the JikkoOps proof-of-concept based on discussions with architecture, product, and operations teams (April 2026).
-
-Last updated: **April 29, 2026**
+**Última actualización**: 2026-04-30  
+**Estado**: Documentación completa, lista para MER y desarrollo

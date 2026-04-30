@@ -1,8 +1,8 @@
 # Flujo de Contratos en JikkoOps
 
-## Overview
+## Descripción General
 
-El flujo de contratos en JikkoOps define cómo una entidad (municipio, gobernación, DIAN) se convierte en cliente y cómo se activan sus servicios.
+El flujo de contratos en JikkoOps define cómo una entidad (municipio, gobernación, DIAN) se convierte en cliente y cómo se activan sus servicios de forma ordenada y auditable.
 
 ## Etapas del Proceso
 
@@ -22,7 +22,7 @@ El flujo de contratos en JikkoOps define cómo una entidad (municipio, gobernaci
 
 ## 1. Prospección (CRM)
 
-**Responsable**: Equipo Comercial
+**Responsable**: Equipo Comercial  
 **Sistema**: G-COPS (Revenue Contract Orchestrator) - módulo CRM
 
 ### Actividades
@@ -32,15 +32,14 @@ El flujo de contratos en JikkoOps define cómo una entidad (municipio, gobernaci
   - Necesidades identificadas
   - Presupuesto estimado
   - Timeline
-  - Contactos
+  - Contactos (decisores, influenciadores)
 
-- Ingresar **Leads**: Información de contactos, decisores, influenciadores
-
+- Ingresar **Leads**: Información de contactos, decisores
 - Seguimiento: Visitas, llamadas, ajustes de propuesta
 
 ## 2. Propuesta Comercial
 
-**Responsable**: Equipo de Producto/Comercial
+**Responsable**: Equipo de Producto/Comercial  
 **Sistema**: G-COPS - módulo Propuestas
 
 ### Elementos de la Propuesta
@@ -80,8 +79,8 @@ Propuesta-2026-MUN-CALI:
 
 ## 3. Firma de Contrato
 
-**Responsable**: Legal/Comercial
-**Sistema**: Sistema externo de firma digital (no JikkoOps)
+**Responsable**: Legal/Comercial  
+**Sistema**: Sistema externo de firma digital
 
 ### Documentos
 
@@ -122,7 +121,7 @@ Contrato-2026-MUN-CALI:
 
 ## 4. Activación en JikkoOps
 
-**Responsable**: Manager de JikkoOps / Operaciones
+**Responsable**: Manager de JikkoOps / Operaciones  
 **Sistema**: G-COPS - módulo Contratos + Configuración
 
 ### Proceso de Activación
@@ -174,7 +173,7 @@ Feature Flags:
 
 ## 5. Operación y Facturación
 
-**Responsable**: Equipo de Operaciones / Finanzas
+**Responsable**: Equipo de Operaciones / Finanzas  
 **Sistema**: G-COPS + CILIN (facturación integrada)
 
 ### Monitoreo
@@ -211,7 +210,7 @@ Envío a CILIN para:
 Si el cliente supera límites:
 
 ```
-Caso: Cali supera 1000 expedientes/mes (limit caute)
+Caso: Cali supera 1000 expedientes/mes (límite caute)
 
 Acción automática:
 1. Sistema notifica a Manager
@@ -223,7 +222,7 @@ Acción automática:
 
 ## 6. Renovación / Ajustes
 
-**Responsable**: Comercial / Operaciones
+**Responsable**: Comercial / Operaciones  
 **Sistema**: G-COPS
 
 ### Renovación
@@ -273,3 +272,7 @@ JikkoOps debe integrarse con:
 - **CILIN**: Para facturación y cobro
 - **Sistema de Pagos**: Para recaudos
 - **CRM Externo**: Si el cliente lo requiere
+
+---
+
+**Versión**: 1.0 | **Actualizado**: 2026-04-30

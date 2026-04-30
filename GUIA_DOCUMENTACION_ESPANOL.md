@@ -11,35 +11,35 @@ jikkoops-docs/
 │   └── README.md
 │
 ├── 01-arquitectura/
-│   ├── vision-general.md
+│   ├── 01-vision-general.md
 │   ├── recursos-protegidos.md
-│   └── principios-base-datos.md (NUEVO)
+│   └── 01-principios-base-datos.md (NUEVO)
 │
 ├── 02-procesos/
-│   ├── flujo-contratos.md
-│   └── modelos-ingresos.md
+│   ├── 01-flujo-contratos.md
+│   └── 02-modelos-ingresos.md
 │
 ├── 03-datos/
-│   ├── modelo-datos.md
+│   ├── 02-modelo-datos.md
 │   ├── sincronizacion-flags.md
 │   ├── estrategia-cache.md
 │   └── gestion-migraciones-alembic.md (NUEVO)
 │
 ├── 04-apis/
-│   ├── endpoints-principales.md
+│   ├── 01-endpoints-principales.md
 │   ├── eventos-integracion.md
 │   └── metricas-sdk.md (NUEVO)
 │
 ├── 05-modulos-nucleares/
-│   ├── dashboard-comercial.md
-│   ├── gestion-contratos.md
+│   ├── 01-dashboard-comercial.md
+│   ├── 02-gestion-contratos.md
 │   ├── operaciones.md
-│   ├── facturacion.md
-│   └── configuracion.md
+│   ├── 04-facturacion.md
+│   └── 05-configuracion.md
 │
 ├── 06-riesgos-y-decisiones/
-│   ├── riesgos-identificados.md
-│   ├── decisiones-arquitecturales.md
+│   ├── 01-riesgos-identificados.md
+│   ├── 02-decisiones-arquitecturales.md
 │   └── seguridad-autenticacion-mfa.md (NUEVO)
 │
 └── GUIA_DOCUMENTACION_ESPANOL.md (ESTE ARCHIVO)
@@ -220,7 +220,7 @@ Para cada Protected Resource:
 
 ## 🚀 Próximos Pasos Inmediatos
 
-1. ✅ Leer principios-base-datos.md
+1. ✅ Leer 01-principios-base-datos.md
 2. ⏳ Documentar casos de uso detallados
 3. ⏳ Iterar BD en ChatGPT hasta 90% completitud
 4. ⏳ Definir Alembic migrations

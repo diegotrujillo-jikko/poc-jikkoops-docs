@@ -34,33 +34,33 @@ jikkoops-docs/
 3. **GUIA_DOCUMENTACION_ESPANOL.md** - Conceptos y paradigma BD-first
 
 ### Arquitectura
-- **01-arquitectura/vision-general.md** - Visión arquitectónica completa
+- **01-arquitectura/01-vision-general.md** - Visión arquitectónica completa
 - **01-arquitectura/recursos-protegidos.md** - Inventario de funcionalidades
 
 ### Procesos de Negocio
-- **02-procesos/flujo-contratos.md** - Ciclo de vida del cliente (prospección → renovación)
-- **02-procesos/modelos-ingresos.md** - Estrategias de monetización
+- **02-procesos/01-flujo-contratos.md** - Ciclo de vida del cliente (prospección → renovación)
+- **02-procesos/02-modelos-ingresos.md** - Estrategias de monetización
 
 ### Base de Datos (⭐ CRÍTICO PARA MER)
-- **03-datos/principios-base-datos.md** - Diseño BD con enfoque iterativo
-- **03-datos/modelo-datos.md** - Esquema de base de datos (10 entidades)
+- **03-datos/01-principios-base-datos.md** - Diseño BD con enfoque iterativo
+- **03-datos/02-modelo-datos.md** - Esquema de base de datos (10 entidades)
 - **03-datos/sincronizacion-flags.md** - Feature flags en tiempo real
 - **03-datos/estrategia-cache.md** - Caché multi-nivel
 
 ### APIs e Integración
-- **04-apis/endpoints-principales.md** - Referencia REST API completa
+- **04-apis/01-endpoints-principales.md** - Referencia REST API completa
 - **04-apis/eventos-integracion.md** - Tipos de eventos y webhooks
 
 ### Módulos del Sistema
-- **05-modulos-nucleares/dashboard-comercial.md** - Dashboard de ventas y KPIs
-- **05-modulos-nucleares/gestion-contratos.md** - Gestión del ciclo de contratos
+- **05-modulos-nucleares/01-dashboard-comercial.md** - Dashboard de ventas y KPIs
+- **05-modulos-nucleares/02-gestion-contratos.md** - Gestión del ciclo de contratos
 - **05-modulos-nucleares/operaciones.md** - Monitoreo y operaciones
-- **05-modulos-nucleares/facturacion.md** - Billing y facturación
-- **05-modulos-nucleares/configuracion.md** - Configuración global
+- **05-modulos-nucleares/04-facturacion.md** - Billing y facturación
+- **05-modulos-nucleares/05-configuracion.md** - Configuración global
 
 ### Riesgos y Decisiones
-- **06-riesgos-y-decisiones/riesgos-identificados.md** - Matriz de riesgos
-- **06-riesgos-y-decisiones/decisiones-arquitecturales.md** - Por qué cada decisión
+- **06-riesgos-y-decisiones/01-riesgos-identificados.md** - Matriz de riesgos
+- **06-riesgos-y-decisiones/02-decisiones-arquitecturales.md** - Por qué cada decisión
 
 ## 🔑 Conceptos Clave
 

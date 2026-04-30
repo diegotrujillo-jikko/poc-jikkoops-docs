@@ -25,7 +25,7 @@
 - Conceptos: Protected Resources, Feature Flags, Plans, Tenants
 - Requisitos de seguridad
 
-### 3. Principios de Base de Datos (03-datos/principios-base-datos.md)
+### 3. Principios de Base de Datos (03-datos/01-principios-base-datos.md)
 - Enfoque base-datos-primero (nuevo paradigma)
 - Proceso iterativo con IA
 - Alembic para migrations
@@ -175,16 +175,16 @@ Documentos Clave Generados:
 ├── 01-arquitectura/
 │   ├── vision-general-es.md
 │   ├── recursos-protegidos.md
-│   └── principios-base-datos.md (NUEVO)
+│   └── 01-principios-base-datos.md (NUEVO)
 ├── 02-procesos/
-│   ├── flujo-contratos.md
-│   └── modelos-ingresos.md
+│   ├── 01-flujo-contratos.md
+│   └── 02-modelos-ingresos.md
 ├── 03-datos/
-│   ├── modelo-datos.md
+│   ├── 02-modelo-datos.md
 │   ├── gestion-migraciones-alembic.md (NUEVO)
 │   └── sincronizacion-flags.md
 ├── 04-apis/
-│   ├── endpoints-principales.md
+│   ├── 01-endpoints-principales.md
 │   └── metricas-sdk.md (NUEVO)
 ├── 06-riesgos-y-decisiones/
 │   └── seguridad-autenticacion-mfa.md (NUEVO)

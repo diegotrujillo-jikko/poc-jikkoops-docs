@@ -44,35 +44,35 @@ poc-jikkoops-docs/
 │   └── Claude.pdf
 │
 ├── 01-arquitectura/                      # System design & architecture
-│   ├── vision-general.md                 # English version
+│   ├── 01-vision-general.md                 # English version
 │   ├── vision-general-es.md              # Spanish version (-es suffix)
-│   └── protected-resources.md
+│   └── 02-protected-resources.md
 │
 ├── 02-procesos/                          # Business workflows & processes
-│   ├── flujo-contratos.md                # Customer lifecycle
-│   ├── revenue-share-models.md           # English
-│   └── modelos-ingresos.md               # Spanish translation
+│   ├── 01-flujo-contratos.md                # Customer lifecycle
+│   ├── 02-revenue-share-models.md           # English
+│   └── 02-modelos-ingresos.md               # Spanish translation
 │
 ├── 03-datos/                             # Data layer & persistence
-│   ├── data-model.md                     # English
-│   ├── modelo-datos.md                   # Spanish
-│   ├── feature-flags-sync.md
-│   └── cache-strategy.md
+│   ├── 02-data-model.md                     # English
+│   ├── 02-modelo-datos.md                   # Spanish
+│   ├── 03-feature-flags-sync.md
+│   └── 04-cache-strategy.md
 │
 ├── 04-apis/                              # Integration endpoints
-│   ├── endpoints-principales.md
-│   └── integration-events.md
+│   ├── 01-endpoints-principales.md
+│   └── 02-integration-events.md
 │
 ├── 05-modulos-core/                      # Core UI modules & features
-│   ├── dashboard-comercial.md
-│   ├── gestion-contratos.md
-│   ├── operacion.md
-│   ├── facturacion.md
-│   └── configuracion.md
+│   ├── 01-dashboard-comercial.md
+│   ├── 02-gestion-contratos.md
+│   ├── 03-operacion.md
+│   ├── 04-facturacion.md
+│   └── 05-configuracion.md
 │
 ├── 06-riesgos-decisiones/                # Risk & architectural decisions
-│   ├── riesgos-identificados.md
-│   └── decisiones-arquitecturales.md
+│   ├── 01-riesgos-identificados.md
+│   └── 02-decisiones-arquitecturales.md
 │
 ├── CLAUDE.md                             # Project instructions for Claude
 ├── README.md                             # User-facing introduction
@@ -90,16 +90,16 @@ poc-jikkoops-docs/
 
 ### English Documentation
 - **Format**: `kebab-case.md`
-- **Examples**: `vision-general.md`, `protected-resources.md`, `revenue-share-models.md`
+- **Examples**: `01-vision-general.md`, `02-protected-resources.md`, `02-revenue-share-models.md`
 
 ### Spanish Translations
 - **Pattern 1**: `-es` suffix (preferred when mirroring English)
-  - `vision-general.md` → `vision-general-es.md`
-  - `data-model.md` → `modelo-datos-es.md` (when translated)
+  - `01-vision-general.md` → `vision-general-es.md`
+  - `02-data-model.md` → `modelo-datos-es.md` (when translated)
   
 - **Pattern 2**: Direct Spanish naming (when no English version)
-  - `modelos-ingresos.md` (standalone)
-  - `modelo-datos.md` (standalone)
+  - `02-modelos-ingresos.md` (standalone)
+  - `02-modelo-datos.md` (standalone)
 
 ### Meeting Transcripts
 - **Format**: `YYYYMMDD-Topic-Counter.md`
@@ -179,19 +179,19 @@ Cross-references to other documentation.
 ```
 
 ### Examples Found
-- `vision-general.md` - Overview of entire system
-- `protected-resources.md` - Feature inventory and activation
-- `flujo-contratos.md` - Complete customer lifecycle
-- `revenue-share-models.md` - Monetization strategies
+- `01-vision-general.md` - Overview of entire system
+- `02-protected-resources.md` - Feature inventory and activation
+- `01-flujo-contratos.md` - Complete customer lifecycle
+- `02-revenue-share-models.md` - Monetization strategies
 
 ## Key Files for Claude Context
 
 When working on JikkoOps features, Claude should read in this order:
 
 1. **CLAUDE.md** - Project overview and instructions
-2. **01-arquitectura/vision-general.md** - System architecture
-3. **02-procesos/flujo-contratos.md** - Customer workflows
-4. **03-datos/data-model.md** - Data structures
+2. **01-arquitectura/01-vision-general.md** - System architecture
+3. **02-procesos/01-flujo-contratos.md** - Customer workflows
+4. **03-datos/02-data-model.md** - Data structures
 5. **Specific module docs** - As needed for the feature
 
 ## Transcript Integration Workflow

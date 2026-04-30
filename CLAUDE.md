@@ -39,32 +39,32 @@ poc-jikkoops-docs/
 ├── 00-general/                    # Entry docs, transcripts, PDFs
 │
 ├── 01-arquitectura/               # System design & concepts
-│   ├── vision-general.md          # Overview of JikkoOps architecture
-│   └── protected-resources.md     # Feature inventory and activation system
+│   ├── 01-vision-general.md          # Overview of JikkoOps architecture
+│   └── 02-protected-resources.md     # Feature inventory and activation system
 │
 ├── 02-procesos/                   # Business processes
-│   ├── flujo-contratos.md         # Full customer lifecycle (prospect → renewal)
-│   └── revenue-share-models.md    # Monetization strategies (modelo-ingresos, %, users, expedients, hybrid)
+│   ├── 01-flujo-contratos.md         # Full customer lifecycle (prospect → renewal)
+│   └── 02-revenue-share-models.md    # Monetization strategies (modelo-ingresos, %, users, expedients, hybrid)
 │
 ├── 03-datos/                      # Data layer
-│   ├── data-model.md              # Entity relationship diagram + SQL schema
-│   ├── feature-flags-sync.md      # How flags sync between DB, cache, and runtime
-│   └── cache-strategy.md          # Multi-level caching (browser, gateway, Redis, DB)
+│   ├── 02-data-model.md              # Entity relationship diagram + SQL schema
+│   ├── 03-feature-flags-sync.md      # How flags sync between DB, cache, and runtime
+│   └── 04-cache-strategy.md          # Multi-level caching (browser, gateway, Redis, DB)
 │
 ├── 04-apis/                       # Integration & endpoints
-│   ├── endpoints-principales.md   # REST API reference (products, plans, tenants, flags, invoices, etc.)
-│   └── integration-events.md      # Event types emitted to SILIN, DOS, SOCIA, webhooks
+│   ├── 01-endpoints-principales.md   # REST API reference (products, plans, tenants, flags, invoices, etc.)
+│   └── 02-integration-events.md      # Event types emitted to SILIN, DOS, SOCIA, webhooks
 │
 ├── 05-modulos-core/               # Core UI modules
-│   ├── dashboard-comercial.md     # Sales dashboard (KPIs, renewals, pipeline)
-│   ├── gestion-contratos.md       # Contract lifecycle (create, review, activate, monitor)
-│   ├── operacion.md               # Operations (health, flags, users, alerts, escalados)
-│   ├── facturacion.md             # Billing (generate, review, emit, collect)
-│   └── configuracion.md           # Global settings (products, plans, models, integrations)
+│   ├── 01-dashboard-comercial.md     # Sales dashboard (KPIs, renewals, pipeline)
+│   ├── 02-gestion-contratos.md       # Contract lifecycle (create, review, activate, monitor)
+│   ├── 03-operacion.md               # Operations (health, flags, users, alerts, escalados)
+│   ├── 04-facturacion.md             # Billing (generate, review, emit, collect)
+│   └── 05-configuracion.md           # Global settings (products, plans, models, integrations)
 │
 ├── 06-riesgos-decisiones/         # Risk & architectural decisions
-│   ├── riesgos-identificados.md   # Risk matrix, causes, impact, mitigations
-│   └── decisiones-arquitecturales.md # Why we chose DB-per-tenant, events, Protected Resources, etc.
+│   ├── 01-riesgos-identificados.md   # Risk matrix, causes, impact, mitigations
+│   └── 02-decisiones-arquitecturales.md # Why we chose DB-per-tenant, events, Protected Resources, etc.
 │
 ├── CLAUDE.md                      # This file
 └── README.md                      # User-facing introduction
@@ -222,7 +222,7 @@ npm run validate:contracts   # Integrity of contracts in DB
 
 ## When Working on New Features
 
-1. **Read first**: 01-arquitectura/vision-general.md + 02-procesos/flujo-contratos.md
+1. **Read first**: 01-arquitectura/01-vision-general.md + 02-procesos/01-flujo-contratos.md
 2. **Map to system**: Which Protected Resources needed? Which Plans affected? Which modules integrate?
 3. **Code review**: Especially if touching revenue, flags, or contracts
 4. **Test thoroughly**: Existing tests must pass, new tests for new code
@@ -230,7 +230,7 @@ npm run validate:contracts   # Integrity of contracts in DB
 
 ## Questions or Blockers?
 
-- **Architecture questions**: See 06-riesgos-decisiones/decisiones-arquitecturales.md
-- **Data model questions**: See 03-datos/data-model.md
-- **API questions**: See 04-apis/endpoints-principales.md
-- **Risk questions**: See 06-riesgos-decisiones/riesgos-identificados.md
+- **Architecture questions**: See 06-riesgos-decisiones/02-decisiones-arquitecturales.md
+- **Data model questions**: See 03-datos/02-data-model.md
+- **API questions**: See 04-apis/01-endpoints-principales.md
+- **Risk questions**: See 06-riesgos-decisiones/01-riesgos-identificados.md

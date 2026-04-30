@@ -121,7 +121,7 @@ Cada función registra:
 ## Próximos Pasos
 
 1. Leer `recursos-protegidos.md` - Inventario de funciones
-2. Leer `principios-base-datos.md` - Diseño de BD
+2. Leer `01-principios-base-datos.md` - Diseño de BD
 3. Crear casos de uso por módulo
 4. Validar BD con IA
 5. Definir Alembic migrations

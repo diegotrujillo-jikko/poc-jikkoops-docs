@@ -60,17 +60,17 @@
 
 **Lectura recomendada**: 15 minutos.
 
-### **01-arquitectura/vision-general.md** (Original en Inglés)
+### **01-arquitectura/01-vision-general.md** (Original en Inglés)
 Versión original - referencia.
 
-### **01-arquitectura/protected-resources.md** (Inglés)
+### **01-arquitectura/02-protected-resources.md** (Inglés)
 Inventario de funcionalidades con definiciones y ejemplos.
 
 ---
 
 ## 💾 DOCUMENTACIÓN DE DATOS
 
-### **03-datos/principios-base-datos.md** ⭐ CRÍTICO PARA MER
+### **03-datos/01-principios-base-datos.md** ⭐ CRÍTICO PARA MER
 **Propósito**: Principios de diseño de BD con enfoque iterativo  
 **Contiene**:
 - Concepto fundamental: BD es el corazón
@@ -96,7 +96,7 @@ Feature flags en tiempo real.
 
 ## 📊 TABLAS CRÍTICAS IDENTIFICADAS
 
-Especificadas en `03-datos/principios-base-datos.md`:
+Especificadas en `03-datos/01-principios-base-datos.md`:
 
 1. **contracts** - Contratos con modelo de revenue
 2. **feature_flags** - Activaciones/desactivaciones
@@ -265,17 +265,17 @@ Ventaja: IA es 10x más rápido para planificación futura
 2. **01-arquitectura/vision-general-es.md** (15 min)
 
 ### Para Diseñar la Base de Datos
-1. **03-datos/principios-base-datos.md** (30 min) ⭐
+1. **03-datos/01-principios-base-datos.md** (30 min) ⭐
 2. **GUIA_DOCUMENTACION_ESPANOL.md** → Casos de Uso (20 min)
 3. Iterar con ChatGPT usando casos de uso
 
 ### Para Generar MER
-1. **03-datos/principios-base-datos.md** → Tablas críticas
+1. **03-datos/01-principios-base-datos.md** → Tablas críticas
 2. **Casos de uso críticos** (CU-001 a CU-008)
 3. Herramienta de diagrams (draw.io, Lucidchart, etc)
 
 ### Para Implementación
-1. **03-datos/principios-base-datos.md** → Especificación completa
+1. **03-datos/01-principios-base-datos.md** → Especificación completa
 2. **Alembic** → Generar migrations
 3. **Cloud Code** → Desarrollo de APIs
 4. **Playwright** → Testing
@@ -322,7 +322,7 @@ Cómo se cobra: Caute, %, por usuario, por expediente, híbrido.
 ## 📞 PREGUNTAS FRECUENTES
 
 **P: ¿Por dónde empiezo?**  
-A: Lee RESUMEN_EJECUTIVO_ES.md (5 min), luego principios-base-datos.md (30 min).
+A: Lee RESUMEN_EJECUTIVO_ES.md (5 min), luego 01-principios-base-datos.md (30 min).
 
 **P: ¿Cuánto toma diseñar la BD al 90%?**  
 A: 2-4 horas iterando con ChatGPT.

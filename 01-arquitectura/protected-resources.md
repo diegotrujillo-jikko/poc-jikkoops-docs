@@ -26,7 +26,7 @@ Cada Protected Resource debe tener:
 | **Código** | `LIQ-001` | Identificador único (prefijo módulo + número) |
 | **Nombre** | `Botón Liquidar` | Descripción breve |
 | **Tipo** | `button` / `endpoint` / `view` | Categoría del recurso |
-| **Módulo** | `CILIN` | Módulo que contiene el recurso |
+| **Módulo** | `SILIN` | Módulo que contiene el recurso |
 | **Descripción** | "Permite al usuario... " | Qué hace el recurso |
 | **Criticidad** | `crítica` / `alta` / `media` / `baja` | Importancia para el negocio |
 | **Dependencias** | `[DB-001, API-002]` | Otros recursos que requiere |
@@ -78,9 +78,9 @@ Se mantiene en el sistema (base de datos, archivo JSON, o Google Sheets):
 ```
 Código | Nombre | Tipo | Módulo | Funcionalidad | Plan Básico | Plan Std | Plan Prem | Estado
 -------|--------|------|--------|---------------|-------------|----------|-----------|--------
-LIQ-001| Liquidar| btn  | CILIN  | Liquidación   | ✓           | ✓        | ✓         | active
+LIQ-001| Liquidar| btn  | SILIN  | Liquidación   | ✓           | ✓        | ✓         | active
 SOC-001| Notif  | btn  | SOCIA  | Notificaciones| ✗           | ✓        | ✓         | active
-DOC-005| Nuevo  | btn  | DOS    | (ninguno)     | -           | -        | -         | huérfano
+DOC-005| Nuevo  | btn  | DOCIA    | (ninguno)     | -           | -        | -         | huérfano
 ```
 
 ## Almacenamiento

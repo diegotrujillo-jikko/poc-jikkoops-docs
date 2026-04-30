@@ -161,7 +161,7 @@ Año 2+: La BD aguanta casos de uso imprevistos
 **CU-004: Reporte Predictivo para Alcalde**
 ```
 1. Alcalde pregunta al chatbot: "¿Cuánto dinero falta para pagar contratos?"
-2. Sistema consulta ingresos proyectados, contratos, caute pendiente
+2. Sistema consulta ingresos proyectados, contratos, modelo-ingresos pendiente
 3. IA genera: "Faltan $X, déficit en mes Z si no mejora recaudo"
 4. Opciones: "¿Qué contratos están en riesgo?"
 5. Sistema lista contratos + probabilidad de no pago

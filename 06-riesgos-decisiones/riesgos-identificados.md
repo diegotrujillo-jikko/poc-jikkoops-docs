@@ -6,7 +6,7 @@
 |---|--------|--------------|---------|-----------|-------|------------|
 | 1 | Desincronización de flags entre BD y aplicación | Media | Alto | 🔴 CRÍTICO | DevOps | Health check c/5min |
 | 2 | Error en cálculo de revenue share | Baja | Crítico | 🔴 CRÍTICO | CFO | Auditoría mensual |
-| 3 | Módulo CILIN/DOS/SOCIA caído | Media | Alto | 🔴 CRÍTICO | Operación | SLA 99.9%, fallover |
+| 3 | Módulo SILIN/DOS/SOCIA caído | Media | Alto | 🔴 CRÍTICO | Operación | SLA 99.9%, fallover |
 | 4 | Pérdida de datos en BD | Muy baja | Crítico | 🔴 CRÍTICO | DBA | Backup diario + test restore |
 | 5 | Escalado de volumen no detectado | Baja | Medio | 🟡 ALTO | Operación | Job automático c/hora |
 | 6 | Cliente intenta acceder post-vencimiento | Medio | Bajo | 🟡 ALTO | Operación | Bloqueo automático en vencimiento |
@@ -46,7 +46,7 @@
 **Descripción**: Factura se genera con cantidad errónea de expedientes, usuarios, o % recaudo.
 
 **Causa posible**:
-- Sincronización fallida con CILIN
+- Sincronización fallida con SILIN
 - Bug en fórmula de cálculo
 - Datos inconsistentes entre sistemas
 
@@ -64,11 +64,11 @@
 
 **Acción si ocurre**:
 1. Manager nota discrepancia en factura (estado: Borrador)
-2. Click "Resincronizar datos" (recolecta de CILIN)
+2. Click "Resincronizar datos" (recolecta de SILIN)
 3. Revisa líneas y cantidades
 4. Emite o anula según corresponda
 
-## 3. Módulo CILIN/DOS/SOCIA Caído
+## 3. Módulo SILIN/DOS/SOCIA Caído
 
 **Descripción**: Uno de los módulos integrados no responde (timeout, error HTTP 500, etc).
 
@@ -79,7 +79,7 @@
 - Sobrecarga
 
 **Impacto**:
-- Tenant no puede liquidar (CILIN)
+- Tenant no puede liquidar (SILIN)
 - Tenant no puede crear documentos (DOS)
 - Tenant no puede notificar (SOCIA)
 - JikkoOps no puede facturas (si no puede confirmar expedientes)
@@ -132,15 +132,15 @@
 
 ## 5. Escalado de Volumen No Detectado
 
-**Descripción**: Tenant supera límite caute pero el sistema no detecta ni cambia modelo de revenue.
+**Descripción**: Tenant supera límite modelo-ingresos pero el sistema no detecta ni cambia modelo de revenue.
 
 **Causa posible**:
 - Job de escalado falla silenciosamente
-- Sincronización de datos con CILIN retrasada
+- Sincronización de datos con SILIN retrasada
 - Lógica de detección bug
 
 **Impacto**:
-- Tenant continúa sin pagar (pasada la fecha caute)
+- Tenant continúa sin pagar (pasada la fecha modelo-ingresos)
 - JikkoOps pierde ingresos
 - Errores en facturación
 
@@ -148,7 +148,7 @@
 - ✓ Job automático cada 1 hora (redundante)
 - ✓ Manual check diario por Operations Manager
 - ✓ Dashboard muestra expedientes procesados vs límite
-- ✓ Alerta si expedientes > 95% límite caute
+- ✓ Alerta si expedientes > 95% límite modelo-ingresos
 - ✓ Email proactivo a cliente cuando se acerca límite
 
 **Acción si ocurre**:

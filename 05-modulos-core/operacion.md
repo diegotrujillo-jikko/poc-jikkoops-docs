@@ -17,7 +17,7 @@ Municipio de Cali (municipio_cali):
 ├── Usuarios activos: 42/50 (84%)
 ├── Expedientes este mes: 450/1000 (45%)
 │
-├─ CILIN: OPERATIVO ✓
+├─ SILIN: OPERATIVO ✓
 │  ├─ Última liquidación: hace 1h
 │  ├─ Expedientes pendientes: 0
 │  └─ Performance: Normal
@@ -46,7 +46,7 @@ Rojo ✗:    Error crítico (módulo caído, acceso bloqueado)
 ```
 GET Municipio de Cali → Feature Flags
 
-Liquidación (CILIN):
+Liquidación (SILIN):
 ├─ LIQ-001 (Botón Liquidar): ON ✓ (Plan Estándar)
 ├─ LIQ-004 (Dashboard): ON ✓ (Plan Estándar)
 ├─ LIQ-005 (Reportes): OFF ✗ (Plan Premium)
@@ -164,7 +164,7 @@ Detalles:
 ```
 Municipio Cali (mes actual):
 ├── Expedientes procesados: 1,050
-├── Límite caute: 1,000
+├── Límite modelo-ingresos: 1,000
 ├── Estado: ⚠️ SUPERADO
 │
 Acciones automáticas:
@@ -182,14 +182,14 @@ Revisión manual:
 
 ### 6. Sincronización de Módulos
 
-**Estado de sincronización con CILIN, DOS, SOCIA**:
+**Estado de sincronización con SILIN, DOS, SOCIA**:
 ```
 Municipio Cali:
 
-CILIN (Liquidación):
+SILIN (Liquidación):
 ├── Última sincronización: hace 5 min
 ├── Expedientes BD Jikkoops: 1,050
-├── Expedientes BD CILIN: 1,050
+├── Expedientes BD SILIN: 1,050
 ├── Diferencia: 0 ✓
 └── Status: SINCRONIZADO
 

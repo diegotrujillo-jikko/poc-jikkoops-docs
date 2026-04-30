@@ -107,7 +107,7 @@ Sistema:
 ├─ Activa feature flags
 ├─ Emite evento contract.activated
 ├─ Envía email de bienvenida al cliente
-└─ Abre espacios en módulos (CILIN, DOS, SOCIA)
+└─ Abre espacios en módulos (SILIN, DOS, SOCIA)
     ↓
 Estado: Activo
 ```
@@ -181,7 +181,7 @@ Ajustar facturación próximo mes
 
 ```
 Contrato Activo
-    ├─→ CILIN: Inicializa liquidación del cliente
+    ├─→ SILIN: Inicializa liquidación del cliente
     ├─→ DOS: Crea espacios documentales
     ├─→ SOCIA: Crea usuarios iniciales
     ├─→ Facturación: Comienza a facturar según modelo

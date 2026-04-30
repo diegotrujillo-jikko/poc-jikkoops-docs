@@ -14,7 +14,7 @@ JikkoOps soporta múltiples modelos de monetización para que cada contrato se a
 
 ```
 Modelo: "CAUTE"
-├── Período caute: Primeros 1000 expedientes (o X días) = $0
+├── Período modelo-ingresos: Primeros 1000 expedientes (o X días) = $0
 ├── Límite: 1000 expedientes/mes
 ├── Activación: Cuando se supera límite
 │   ├── Feature flags: [10% recaudo] activan
@@ -61,7 +61,7 @@ Mes 2:
 ```
 
 **Validación**: 
-- ✓ Revisar estado de recaudos en CILIN
+- ✓ Revisar estado de recaudos en SILIN
 - ✓ Comparar con reportes de tesorería del municipio
 - ✓ Auditar diferencias >5%
 
@@ -89,7 +89,7 @@ Mes 3 (55 activos): $110.000 (5 excedentes × $2000)
 
 ### 4. Por Expedientes Procesados
 
-**Caso de uso**: Servicios de liquidación, CILIN integrado
+**Caso de uso**: Servicios de liquidación, SILIN integrado
 
 ```
 Modelo: "PER_EXPEDIENT"
@@ -170,7 +170,7 @@ Total: $31.000
 | Municipio pequeño, bajo presupuesto | Primera vez | Caute + Porcentaje |
 | Municipio grande, recaudo importante | Capacidad de pago | % Recaudo puro |
 | Contratación de servicios (DOS, IAM) | Usuarios centralizados | Por Usuario |
-| Liquidación integrada (CILIN) | Alto volumen expedientes | Por Expediente |
+| Liquidación integrada (SILIN) | Alto volumen expedientes | Por Expediente |
 | Multi-servicio complejo | Mezcla de servicios | Híbrido personalizado |
 
 ### Plantilla de Propuesta
@@ -183,7 +183,7 @@ Toda propuesta debe especificar:
 **Tipo**: [Caute | Porcentaje | Por Usuario | Por Expediente | Híbrido]
 
 **Detalles**:
-- Período caute (si aplica): X meses o Y expedientes
+- Período modelo-ingresos (si aplica): X meses o Y expedientes
 - Precio/unidad: $XXX
 - Mínimo mensual: $XXX (si aplica)
 - Máximo mensual: $XXX (si aplica)
@@ -206,7 +206,7 @@ Toda propuesta debe especificar:
 
 ```
 1. Recolectar datos del período (M-1)
-   ├── Expedientes procesados (de CILIN)
+   ├── Expedientes procesados (de SILIN)
    ├── Usuarios activos (de IAM)
    ├── Recaudos procesados (de Sistema de Pagos)
    └── Feature flags activados
@@ -223,7 +223,7 @@ Toda propuesta debe especificar:
    ├── Términos de pago
    └── Fecha de vencimiento
 
-4. Enviar a CILIN
+4. Enviar a SILIN
    ├── Para generación de cobro coactivo
    ├── Para registro contable
    └── Para auditoría
@@ -240,9 +240,9 @@ Toda propuesta debe especificar:
 
 ```
 Validación Modelo "Caute + %":
-├── Expedientes: Comparar BD con reporte CILIN
+├── Expedientes: Comparar BD con reporte SILIN
 ├── Recaudos: Comparar con Sistema de Pagos
-├── Limite caute (1000): ¿Se superó? → Activar % recaudo
+├── Limite modelo-ingresos (1000): ¿Se superó? → Activar % recaudo
 ├── Cálculo: Verificar fórmula aplicada correctamente
 └── Comparación: vs. mes anterior (verificar anomalías >10%)
 ```
@@ -255,7 +255,7 @@ Validación Modelo "Caute + %":
 
 ### Ajustes Permitidos
 - ✓ Descuento por volumen (5-10%)
-- ✓ Período extendido de caute (por acuerdo comercial)
+- ✓ Período extendido de modelo-ingresos (por acuerdo comercial)
 - ✓ Promoción temporal (máx 2 meses)
 
 ### Ajustes NO Permitidos (requieren aprobación)

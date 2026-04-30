@@ -45,7 +45,7 @@ GET /api/v1/modules/metadata
 Cache-Control: public, max-age=1800  // 30 min
 
 Datos:
-├── Versión de CILIN, DOS, SOCIA
+├── Versión de SILIN, DOS, SOCIA
 ├── Información de integración
 └── URLs de endpoints
 ```

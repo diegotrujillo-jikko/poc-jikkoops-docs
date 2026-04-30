@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - **Commercialize services**: Create, manage, and sell digital government services as customizable plans
 - **Control access**: Use Protected Resources and feature flags to activate/deactivate functionality by tenant and plan
-- **Monetize flexibly**: Support multiple revenue models (caute, percentage, per-user, per-expedient, hybrid)
+- **Monetize flexibly**: Support multiple revenue models (modelo-ingresos, percentage, per-user, per-expedient, hybrid)
 - **Integrate seamlessly**: Sync with SILIN (liquidation), DOCS (documents), SOCIA (citizen services), and external systems
 - **Audit comprehensively**: Maintain immutable logs of all changes for compliance
 
@@ -44,7 +44,7 @@ poc-jikkoops-docs/
 │
 ├── 02-procesos/                   # Business processes
 │   ├── flujo-contratos.md         # Full customer lifecycle (prospect → renewal)
-│   └── revenue-share-models.md    # Monetization strategies (caute, %, users, expedients, hybrid)
+│   └── revenue-share-models.md    # Monetization strategies (modelo-ingresos, %, users, expedients, hybrid)
 │
 ├── 03-datos/                      # Data layer
 │   ├── data-model.md              # Entity relationship diagram + SQL schema
@@ -53,7 +53,7 @@ poc-jikkoops-docs/
 │
 ├── 04-apis/                       # Integration & endpoints
 │   ├── endpoints-principales.md   # REST API reference (products, plans, tenants, flags, invoices, etc.)
-│   └── integration-events.md      # Event types emitted to CILIN, DOS, SOCIA, webhooks
+│   └── integration-events.md      # Event types emitted to SILIN, DOS, SOCIA, webhooks
 │
 ├── 05-modulos-core/               # Core UI modules
 │   ├── dashboard-comercial.md     # Sales dashboard (KPIs, renewals, pipeline)
@@ -92,7 +92,7 @@ Determines if a Protected Resource is ON/OFF for a specific tenant at runtime.
 
 **Example**:
 - Contract is "Plan Estándar" → Flags: LIQ-001=ON, SOC-001=OFF (Plan Premium only)
-- Escalado detected (caute limit exceeded) → Flags: SOC-002 (% recaudo)=ON automatically
+- Escalado detected (modelo-ingresos limit exceeded) → Flags: SOC-002 (% recaudo)=ON automatically
 
 **Stored in**: `feature_flags` table + Redis caché (TTL 5 min)
 
@@ -101,7 +101,7 @@ Determines if a Protected Resource is ON/OFF for a specific tenant at runtime.
 A Plan is a combination of:
 - Funcionalidades (e.g., Liquidación, Expedientes, Notificaciones)
 - Protected Resources enabled for those features
-- Revenue model (caute, %, users, etc.)
+- Revenue model (modelo-ingresos, %, users, etc.)
 - Límites (users, expedients/month, storage)
 
 **Example**: "Plan Estándar" = SILIN + DOCS, 50 users, $X/month
@@ -116,7 +116,7 @@ One **Entity** (municipio) → One or more **Tenants** (instances in JikkoOps) �
 - **PERCENTAGE_REVENUE**: % of collected revenue
 - **PER_USER**: $X per active user per month
 - **PER_EXPEDIENT**: $X per expedient processed
-- **HÍBRIDO**: Combinations (e.g., caute then percentage)
+- **HÍBRIDO**: Combinations (e.g., modelo-ingresos then percentage)
 
 **Critical**: Changes to pricing require auditable approval (CFO validates, legal reviews).
 
@@ -191,7 +191,7 @@ npm run validate:models  # Validate revenue models in config
 
 JikkoOps uses feature flags to control:
 - Which Protected Resources are active per tenant
-- Automatic escalado de volumen (caute → percentage)
+- Automatic escalado de volumen (modelo-ingresos → percentage)
 - New functionality rollout (beta features)
 
 **View flags**: Operations dashboard or `GET /tenant/flags`

@@ -6,7 +6,7 @@
 
 ## Propósito
 
-- ✅ Comercializar servicios modulares (CILIN, DOS, SOCIA)
+- ✅ Comercializar servicios modulares (SILIN, DOS, SOCIA)
 - ✅ Controlar acceso granular mediante Protected Resources + Feature Flags
 - ✅ Monetizar flexiblemente (Caute, % recaudo, por usuario, expediente, híbridos)
 - ✅ Integrar ecosistema SIGIA (sincronización bidireccional)
@@ -67,8 +67,8 @@ Inventario de funcionalidades (botones, endpoints, vistas):
 
 ### Plans (Ofertas Comerciales)
 Combinación de funcionalidades + modelo de pricing:
-- Plan Básico: CILIN, 50 usuarios, $0
-- Plan Estándar: CILIN + DOS, 100 usuarios, 10% recaudo
+- Plan Básico: SILIN, 50 usuarios, $0
+- Plan Estándar: SILIN + DOS, 100 usuarios, 10% recaudo
 - Plan Premium: Todos, ilimitado, 20% recaudo
 
 ### Tenant Entitlements

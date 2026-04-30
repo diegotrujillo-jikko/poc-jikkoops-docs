@@ -19,7 +19,7 @@ Revisar antes de enviar
     ↓
 Enviar a cliente
     ↓
-Registrar en contabilidad (CILIN)
+Registrar en contabilidad (SILIN)
     ↓
 Cobro (si aplica)
 ```
@@ -32,7 +32,7 @@ Cobro (si aplica)
 Para cada tenant activo:
 1. Leer período (mes anterior)
 2. Recolectar datos:
-   ├─ Expedientes procesados (desde CILIN)
+   ├─ Expedientes procesados (desde SILIN)
    ├─ Usuarios activos (desde IAM)
    ├─ Recaudos procesados (desde Pagos)
    └─ Vigencia de contrato (validar no vencido)
@@ -48,7 +48,7 @@ Para cada tenant activo:
 7. Enviar a revisión (si está configurado)
 8. Una vez aprobada: Emitir
 9. Enviar a cliente
-10. Registrar en CILIN para cobro
+10. Registrar en SILIN para cobro
 ```
 
 **Validaciones críticas**:
@@ -117,7 +117,7 @@ LÍNEAS DE FACTURACIÓN:
 ────────────────────────────────────
 Descripción                Cantidad   Precio Unit  Subtotal
 Expedientes procesados        450        $200      $90,000
-  (Modelo: Por Expediente, caute)
+  (Modelo: Por Expediente, modelo-ingresos)
 
 ─────────────────────────────────────
 Subtotal:                                           $90,000
@@ -182,10 +182,10 @@ Validaciones finales:
 
 ## 5. Cobro de Facturas
 
-**Integración con CILIN**:
+**Integración con SILIN**:
 ```
 Cuando factura se emite:
-    ├─→ CILIN: Registra cobro
+    ├─→ SILIN: Registra cobro
     ├─→ Sistema de Pagos: Crea recibo de pago
     └─→ Contabilidad: Registra ingreso
 
@@ -299,7 +299,7 @@ Admin:
 
 ```
 JikkoOps Facturación
-        ├─→ CILIN: Registra cobro
+        ├─→ SILIN: Registra cobro
         ├─→ Sistema de Pagos: Procesa pago
         ├─→ Email: Envía factura al cliente
         ├─→ Contabilidad ERP: Registra ingreso

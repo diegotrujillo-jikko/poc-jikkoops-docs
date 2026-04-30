@@ -117,8 +117,8 @@ Año 2+: BD aguanta casos de uso imprevistos → Stable
 
 ## 📊 Casos de Uso Críticos para Validar BD
 
-1. **CU-001**: Crear contrato caute + porcentaje, generar factura
-2. **CU-002**: Escalado automático cuando se supera límite caute
+1. **CU-001**: Crear contrato modelo-ingresos + porcentaje, generar factura
+2. **CU-002**: Escalado automático cuando se supera límite modelo-ingresos
 3. **CU-003**: MFA en liquidación crítica
 4. **CU-004**: Reporte predictivo: "¿Cuánto dinero falta?"
 5. **CU-005**: Cambiar Protected Resource sin afectar producción

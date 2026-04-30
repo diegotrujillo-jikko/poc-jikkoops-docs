@@ -87,7 +87,7 @@ TABLE plans
 ├── usuario_limite: INT (NULL = ilimitado)
 ├── expediente_limite_mes: INT (NULL = ilimitado)
 ├── precio_fijo: DECIMAL (NULL si no aplica)
-├── modelo_revenue: JSON (caute, %, usuario, expediente, etc.)
+├── modelo_revenue: JSON (modelo-ingresos, %, usuario, expediente, etc.)
 ├── estado: ENUM ['activo', 'deprecated']
 ├── fecha_creacion: TIMESTAMP
 └── fecha_actualizacion: TIMESTAMP
@@ -100,7 +100,7 @@ TABLE features
 ├── id: UUID (PK)
 ├── nombre: STRING -- e.g., 'Liquidación', 'Expedientes'
 ├── descripcion: TEXT
-├── modulo: ENUM ['CILIN', 'DOS', 'SOCIA', 'IAM']
+├── modulo: ENUM ['SILIN', 'DOS', 'SOCIA', 'IAM']
 ├── protected_resources: ARRAY<UUID> (recursos que componen esta feature)
 ├── criticidad: ENUM ['critica', 'alta', 'media', 'baja']
 ├── estado: ENUM ['activo', 'beta', 'deprecated']
@@ -115,7 +115,7 @@ TABLE protected_resources
 ├── codigo: STRING (unique) -- e.g., 'LIQ-001'
 ├── nombre: STRING
 ├── tipo: ENUM ['button', 'endpoint', 'view', 'action']
-├── modulo: ENUM ['CILIN', 'DOS', 'SOCIA', 'IAM']
+├── modulo: ENUM ['SILIN', 'DOS', 'SOCIA', 'IAM']
 ├── feature_id: UUID (FK → features, NULL si huérfano)
 ├── descripcion: TEXT
 ├── criticidad: ENUM ['critica', 'alta', 'media', 'baja']

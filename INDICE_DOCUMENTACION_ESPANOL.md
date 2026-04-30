@@ -162,7 +162,7 @@ Operador intenta liquidar $50M
 ### CU-004: Reporte Predictivo
 ```
 Alcalde pregunta: "¿Cuánto dinero falta para pagar contratos?"
-→ Sistema consulta: ingresos, contratos, caute
+→ Sistema consulta: ingresos, contratos, modelo-ingresos
 → IA genera: "Faltan $X, déficit en mes Z"
 ```
 
@@ -309,7 +309,7 @@ Control en runtime de qué está activo/inactivo.
 
 ### Plans (Ofertas Comerciales)
 Combinación de funcionalidades + modelo de pricing.  
-**Ejemplo**: Plan Estándar = CILIN + DOS, 50 users, 10%
+**Ejemplo**: Plan Estándar = SILIN + DOS, 50 users, 10%
 
 ### Tenant Entitlements
 Qué Protected Resources tiene activos cada cliente.

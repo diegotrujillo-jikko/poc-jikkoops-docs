@@ -50,7 +50,7 @@ CU-008: "¿Cuánto vale el downtime de 1 minuto en producción?"
    "Diseña una BD PostgreSQL para JikkoOps que soporte:
    - 50M liquidaciones/mes
    - Multi-tenant (cada entidad tiene su BD)
-   - Modelos de pricing: caute, %, usuario, expediente, híbrido
+   - Modelos de pricing: modelo-ingresos, %, usuario, expediente, híbrido
    - MFA en endpoints críticos
    - Auditoría de 7 años
    - Métricas por función
@@ -62,7 +62,7 @@ CU-008: "¿Cuánto vale el downtime de 1 minuto en producción?"
 
 3. **Validar cada tabla con preguntas:**
    ```
-   P: "¿Esta tabla soporta escalado automático de modelo caute→porcentaje?"
+   P: "¿Esta tabla soporta escalado automático de modelo modelo-ingresos→porcentaje?"
    R: No → Agregamos columna `escalado_tipo`, `escalado_fecha`, `escalado_por_uuid`
    
    P: "¿Cómo registro cada cambio de feature flag?"
@@ -171,12 +171,12 @@ def downgrade():
 Para cada caso de uso, verificar:
 
 ```
-CU-001: "Crear contrato con modelo caute + porcentaje"
+CU-001: "Crear contrato con modelo modelo-ingresos + porcentaje"
 ├─ ¿Tabla contracts existe? ✓
 ├─ ¿Columna modelo_revenue? ✓
 ├─ ¿Tabla tenant_entitlements para flags? ✓
 ├─ ¿Registro automático en audit_log? ✓
-└─ ¿Calcular próxima factura? Necesita columna límite_caute
+└─ ¿Calcular próxima factura? Necesita columna límite_modelo-ingresos
 
 CU-002: "Liquidación requiere MFA"
 ├─ ¿Tabla mfa_credentials? ✓
@@ -197,8 +197,8 @@ TABLE contracts
 ├── fecha_firma: DATE
 ├── fecha_inicio: DATE
 ├── fecha_vencimiento: DATE
-├── modelo_revenue: JSON (caute, %, usuario, expediente, híbrido)
-├── limite_caute: INT (expedientes)
+├── modelo_revenue: JSON (modelo-ingresos, %, usuario, expediente, híbrido)
+├── limite_modelo-ingresos: INT (expedientes)
 ├── porcentaje_recaudo: DECIMAL (%)
 ├── valor_total_cop: DECIMAL
 ├── estado: ENUM (borrador, en_revisión, activo, vencido, cancelado)

@@ -155,7 +155,7 @@ llaman administración de usuarios.
 Ya voy para allá. Entonces, hay uno que es el papá de todos, que se llama el CIGIA.
 
 ## @20:38 - Juan David Lopez
-Entonces, el CIGIA ya tenemos CILIN, o sea, ya adentro es CIGIA. CILIN, DOS, SOCIA adentro
+Entonces, el CIGIA ya tenemos SILIN, o sea, ya adentro es CIGIA. SILIN, DOS, SOCIA adentro
 es CIGIA, y DOCIA adentro es CIGIA.
 ¿Listo? Y acá es donde vamos a tener lo que llamamos IAM. Este es el que va a tener toda la
 administración de usuario de todo.
@@ -499,7 +499,7 @@ Oportunidades de negocio, va a tener la información, va a tener los leads, ¿s�
 entraría el CRM, por acá.
 Entonces, yo lo que puedo hacer primero es crear un producto, entrar a productos para mirar
 qué productos tengo yo.
-¿Qué productos tengo yo? Van a aparecer todas las aplicaciones, el CIGIA, CILIN, por ejemplo,
+¿Qué productos tengo yo? Van a aparecer todas las aplicaciones, el CIGIA, SILIN, por ejemplo,
 el... El de usuarios, pues el de usuarios, digamos, ese tema de recursos también lo podemos
 hacer por usuarios, pero yo metería todos los recursos de usuarios siempre dentro de los
 planes.
@@ -995,7 +995,7 @@ back office, comercial, debe manejar contratos, planes, suscripciones, capacidad
 fecha, inicio, fin, facturación del SAS.
 Alcaldía de Palmira compró expedientes, coro coaltivo predial, inició tal fecha y fina tal fecha.
 GCOPS es la fuente de verdad contractual.
-CIGIA, CILIN, Runtime Operation, debe manejar. ¿Qué puede usar realmente el sistema en
+CIGIA, SILIN, Runtime Operation, debe manejar. ¿Qué puede usar realmente el sistema en
 tiempo real? Validación de acceso. Y Feature Flash Activos, que lo podemos desactivar
 también, ¿no?
 Toda una funcionalidad la podemos desactivar. O podemos montarla desactivada e ir
@@ -1011,7 +1011,7 @@ determinación, discusión, coro coactivo, fiscalización, sancionatorios y cada
 Me gustaría venderlos por cada tipo de impuesto y por cada tipo de expediente. Ejemplo, una
 alcaldía solo compra coro coactivo, impuesto prioritario y solo puede beber eso.
 ¿Cómo se podría hacer? Voy a analizar, voy a aterrizarlo como diseño comercial, permisos,
-datos. Si puedes hacerlo, la clave es manejar CILIN con licenciamiento por capacidades, que
+datos. Si puedes hacerlo, la clave es manejar SILIN con licenciamiento por capacidades, que
 es lo que usted ha estado hablando ahí.
 Entidad, módulo, tipo de expediente, impuesto, alcaldía de Palmira, módulo, expediente, tipo de
 expediente, coro coactivo, impuesto predial, estado. Entonces, por acá le quería mostrar los
@@ -1019,8 +1019,8 @@ recursos.
 Expediente como servicio obligatorio de cartera. Cliente solo compra expediente, sistema
 externo a la alcaldía, conector adaptador, servicio de obligación y cartera, módulo de
 expediente.
-Cliente compra CILIN completo, CILIN facturación. Ah, se le estaba preguntando que qué
-pasaba, CILIN completado a otro. Digamos, S3 o otro software.
+Cliente compra SILIN completo, SILIN facturación. Ah, se le estaba preguntando que qué
+pasaba, SILIN completado a otro. Digamos, S3 o otro software.
 SILIM, módulo liquidador y capas de integración. No debes partir SILIM entre vasos
 obligatorias. Módulo comercial desacopable. Aquí estaba preguntando.
 

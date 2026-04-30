@@ -153,7 +153,7 @@ Email automático a cliente
 ```
 Sistema detecta (automático):
 ├─ Cliente PEREIRA: 30 días vencido
-├─ Expedientes superan límite caute
+├─ Expedientes superan límite modelo-ingresos
 └─ Acceso bloqueado por 3+ días
 
 Dashboard muestra alerta

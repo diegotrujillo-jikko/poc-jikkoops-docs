@@ -49,7 +49,7 @@ Basada en los **Productos** definidos (combinaciones de funcionalidades):
 ```
 Propuesta-2026-MUN-CALI:
 ├── Servicios Incluidos
-│   ├── CILIN (Liquidación)
+│   ├── SILIN (Liquidación)
 │   │   └── Funcionalidades: Liquidación básica, Reportes, Ajustes
 │   ├── DOS (Documentos)
 │   │   └── Funcionalidades: Gestión básica, TRD, Firma digital
@@ -58,7 +58,7 @@ Propuesta-2026-MUN-CALI:
 │
 ├── Modelo de Pricing
 │   ├── Cantidad de usuarios: 50
-│   ├── Cantidad de expedientes: 1000/mes (caute, pague después)
+│   ├── Cantidad de expedientes: 1000/mes (modelo-ingresos, pague después)
 │   ├── Revenue share: 10% de recaudo (después de 1000 expedientes)
 │   ├── Período: 12 meses
 │   └── Valor total: $XXX.XXX COP
@@ -109,7 +109,7 @@ Contrato-2026-MUN-CALI:
 │
 ├── Términos Financieros
 │   ├── Modelo: Por expediente + % recaudo
-│   ├── Valor fijo: $0 (período caute)
+│   ├── Valor fijo: $0 (período modelo-ingresos)
 │   ├── Variables: 10% de cada expediente procesado
 │   └── Forma de pago: [Transferencia, TDC, Débito automático]
 │
@@ -144,7 +144,7 @@ Tenant (cali-2026):
 ├── Región: Colombia - Valle del Cauca
 ├── Plan: Plan Estándar + DOS
 ├── Usuarios permitidos: 50
-├── Expedientes/mes: 1000 (caute)
+├── Expedientes/mes: 1000 (modelo-ingresos)
 ├── Datos de facturación: [Dirección, RUT, Email]
 └── Configuración técnica: [BD, API keys, Webhooks]
 ```
@@ -174,7 +174,7 @@ Feature Flags:
 ## 5. Operación y Facturación
 
 **Responsable**: Equipo de Operaciones / Finanzas  
-**Sistema**: G-COPS + CILIN (facturación integrada)
+**Sistema**: G-COPS + SILIN (facturación integrada)
 
 ### Monitoreo
 
@@ -195,13 +195,13 @@ KPIs por contrato:
 Factura (MES-YYYY-CALI):
 ├── Período: YYYY-MM-01 a YYYY-MM-30
 ├── Cantidad de expedientes: 450
-├── Costo unitario (caute): $0
+├── Costo unitario (modelo-ingresos): $0
 ├── Total variable (10%): $X.XXX
 ├── Subtotal: $X.XXX
 ├── IVA: $X.XXX
 └── Total: $X.XXX
 
-Envío a CILIN para:
+Envío a SILIN para:
 └── Generación de cobro coactivo si es necesario
 ```
 
@@ -210,7 +210,7 @@ Envío a CILIN para:
 Si el cliente supera límites:
 
 ```
-Caso: Cali supera 1000 expedientes/mes (límite caute)
+Caso: Cali supera 1000 expedientes/mes (límite modelo-ingresos)
 
 Acción automática:
 1. Sistema notifica a Manager
@@ -269,7 +269,7 @@ Todos los cambios requieren:
 
 JikkoOps debe integrarse con:
 - **SIGIA**: Para sincronización de usuarios y expedientes
-- **CILIN**: Para facturación y cobro
+- **SILIN**: Para facturación y cobro
 - **Sistema de Pagos**: Para recaudos
 - **CRM Externo**: Si el cliente lo requiere
 

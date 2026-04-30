@@ -121,9 +121,9 @@ Scheduled Job: "escalado_de_volumen" (cada 1 hora)
       └─ Marcar contrato para revisión (próxima facturación)
 ```
 
-### Sincronización con CILIN
+### Sincronización con SILIN
 
-Cuando CILIN (módulo de liquidación) genera liquidaciones, debe confirmar:
+Cuando SILIN (módulo de liquidación) genera liquidaciones, debe confirmar:
 
 ```
 POST /jikkoops/api/v1/sync-expedient
@@ -137,7 +137,7 @@ POST /jikkoops/api/v1/sync-expedient
 JikkoOps:
 ├─ Registra expediente
 ├─ Incrementa contador del mes
-├─ Valida si supera límite caute
+├─ Valida si supera límite modelo-ingresos
 ├─ Actualiza flags si es necesario
 └─ Response: { "expediente_registrado": true, "flags_updated": false }
 ```
@@ -147,14 +147,14 @@ JikkoOps:
 ### Estados Esperados por Escenario
 
 ```
-Escenario 1: Plan Básico (CILIN only)
+Escenario 1: Plan Básico (SILIN only)
 ├── LIQ-001 (Botón Liquidar): ON ✓
 ├── LIQ-004 (Dashboard): ON ✓
 ├── DOC-001 (Crear Documento): OFF ✗
 ├── SOC-001 (Notificación): OFF ✗
 └── REP-001 (Reportes): OFF ✗
 
-Escenario 2: Plan Estándar (CILIN + DOS)
+Escenario 2: Plan Estándar (SILIN + DOS)
 ├── LIQ-001 (Botón Liquidar): ON ✓
 ├── LIQ-004 (Dashboard): ON ✓
 ├── DOC-001 (Crear Documento): ON ✓
@@ -245,7 +245,7 @@ Response:
 
 ### Replicar Flags a SIGIA
 
-Si el tenant usa SIGIA (CILIN, DOS, SOCIA), deben saber qué está activo:
+Si el tenant usa SIGIA (SILIN, DOS, SOCIA), deben saber qué está activo:
 
 ```
 POST https://sigia.internal/api/v1/sync-flags
@@ -271,11 +271,11 @@ SIGIA responde:
 Si algo falla después de cambiar flags:
 
 ```
-Caso: Activar DOS para tenant, pero CILIN + DOS = timeout
+Caso: Activar DOS para tenant, pero SILIN + DOS = timeout
 
 Acción manual:
 1. Revertir flags a estado anterior
-2. Logging: "Rollback de flags - DOS causes timeout with CILIN"
+2. Logging: "Rollback de flags - DOS causes timeout with SILIN"
 3. Investigar: ¿Incompatibilidad?
 4. Notificar al cliente
 5. Escalar a arquitectura

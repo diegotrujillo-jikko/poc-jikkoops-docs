@@ -57,7 +57,7 @@
 
 **Razones**:
 - Desacoplamiento: Módulos no dependen uno del otro estar up
-- Resiliencia: Si CILIN está lento, JikkoOps sigue funcionando
+- Resiliencia: Si SILIN está lento, JikkoOps sigue funcionando
 - Escalabilidad: Múltiples consumidores del mismo evento
 - Auditoría: Event log completo es source of truth
 
@@ -167,7 +167,7 @@
 
 ## 8. Modelos de Revenue Configurables (JSON, No Code)
 
-**Decisión**: Guardar definición de modelos de revenue (caute, %, usuarios, etc) como JSON en BD.
+**Decisión**: Guardar definición de modelos de revenue (modelo-ingresos, %, usuarios, etc) como JSON en BD.
 
 **Alternativas**:
 - Código hardcoded
@@ -176,7 +176,7 @@
 
 **Razones**:
 - Cambios sin código: CFO puede actualizarlos
-- Escalado automático: Detectar límite caute y cambiar modelo
+- Escalado automático: Detectar límite modelo-ingresos y cambiar modelo
 - Auditable: Ver qué modelo se aplicó cuando
 - Testing: Probar nuevos modelos sin deploy
 
@@ -191,7 +191,7 @@
 
 ## 9. Módulos Integrados vs Construidos In-House
 
-**Decisión**: Integrar CILIN, DOS, SOCIA (sistemas existentes), no construir nuestros.
+**Decisión**: Integrar SILIN, DOS, SOCIA (sistemas existentes), no construir nuestros.
 
 **Alternativas**:
 - Construir liquidación propia
@@ -199,17 +199,17 @@
 
 **Razones**:
 - Rápido a mercado
-- Especialista en cada cosa (CILIN hace liquidación bien)
+- Especialista en cada cosa (SILIN hace liquidación bien)
 - Menor burden operacional
 - Compliance ya existe en módulos
 
 **Tradeoff**:
 - Dependencia de otros equipos
-- Cambios en CILIN nos afectan
+- Cambios en SILIN nos afectan
 - Mitigado: APIs versionadas, contractos claros
 
 **Riesgo**:
-- CILIN caído → JikkoOps no puede facturar
+- SILIN caído → JikkoOps no puede facturar
 - Mitigado: Modo degradado, caché de últimos datos
 
 ## 10. Audit Log Inmutable (Insert-only Table)

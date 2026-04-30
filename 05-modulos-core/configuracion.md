@@ -24,7 +24,7 @@ Sistema:
 └── Idiomas soportados: [Español, English]
 
 Integración:
-├── CILIN
+├── SILIN
 │  ├─ URL API
 │  ├─ API Key
 │  └─ Secret
@@ -173,7 +173,7 @@ Información:
 ├── Código: LIQ-001
 ├── Nombre: Botón Liquidar
 ├── Tipo: button
-├── Módulo: CILIN
+├── Módulo: SILIN
 ├── Criticidad: crítica
 └── Estado: activo
 
@@ -238,11 +238,11 @@ Implementación:
 └─ Documentar para equipo
 ```
 
-### 6. Configuración de Módulos (CILIN, DOS, SOCIA)
+### 6. Configuración de Módulos (SILIN, DOS, SOCIA)
 
 **Para cada módulo integrado**:
 ```
-Módulo: CILIN (Liquidación)
+Módulo: SILIN (Liquidación)
 
 Integración:
 ├── URL API: https://cilin.internal/api/v1
@@ -260,7 +260,7 @@ Sincronización:
 └─ Validar integridad: Sí
 
 Webhooks:
-├── Eventos que CILIN envía: [liquidacion_completada, error_liquidacion]
+├── Eventos que SILIN envía: [liquidacion_completada, error_liquidacion]
 ├── Endpoint para recibir: /webhooks/cilin
 ├── Secret para validar: [encriptado]
 └── Test de webhook: [botón]

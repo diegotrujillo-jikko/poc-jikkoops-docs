@@ -2,7 +2,7 @@
 
 ## Overview
 
-JikkoOps emite eventos para que otros sistemas (CILIN, DOS, SOCIA, sistemas externos) se enteres de cambios y actúen en consecuencia.
+JikkoOps emite eventos para que otros sistemas (SILIN, DOS, SOCIA, sistemas externos) se enteres de cambios y actúen en consecuencia.
 
 ## Arquitectura de Eventos
 
@@ -12,7 +12,7 @@ Evento ocurre en JikkoOps
 Message Queue (RabbitMQ / Kafka)
         ↓
 Suscriptores:
-├── CILIN (liquidación)
+├── SILIN (liquidación)
 ├── DOS (documentos)
 ├── SOCIA (ciudadano)
 ├── Webhooks externos
@@ -38,7 +38,7 @@ Se emite cuando un contrato se activa y comienza a servir.
         "entity_nombre": "Municipio de Cali",
         "plan_id": "uuid",
         "plan_nombre": "Plan Estándar",
-        "servicios_activados": ["CILIN", "DOS"],
+        "servicios_activados": ["SILIN", "DOS"],
         "protected_resources_activados": [
             "LIQ-001", "LIQ-004", "DOC-001", "DOC-003"
         ],
@@ -46,16 +46,16 @@ Se emite cuando un contrato se activa y comienza a servir.
         "fecha_vigencia_fin": "2027-05-01",
         "modelo_revenue": {
             "tipo": "CAUTE",
-            "periodo_caute_dias": 180
+            "periodo_modelo-ingresos_dias": 180
         }
     }
 }
 ```
 
-**Destinatarios**: CILIN, DOS, SOCIA (para inicializar)
+**Destinatarios**: SILIN, DOS, SOCIA (para inicializar)
 
 **Acción esperada**:
-- CILIN: Crear tenant y configurar liquidación
+- SILIN: Crear tenant y configurar liquidación
 - DOS: Crear espacios documentales
 - SOCIA: Crear usuario administrador
 
@@ -83,7 +83,7 @@ Se emite cuando un contrato vence o es cancelado.
 ```
 
 **Acción esperada**:
-- CILIN: Marcar tenant como inactivo, pausar liquidaciones
+- SILIN: Marcar tenant como inactivo, pausar liquidaciones
 - DOS: Hacer backup de documentos
 - SOCIA: Bloquear acceso de usuarios
 - Auditoría: Archivar datos
@@ -100,7 +100,7 @@ Se emite cuando el tenant supera un límite y cambia el modelo de revenue.
     "data": {
         "tenant_id": "uuid",
         "tenant_nombre": "municipio_cali",
-        "evento": "caute_completado",
+        "evento": "modelo-ingresos_completado",
         "estadistica_anterior": {
             "modelo": "CAUTE",
             "expedientes_limite": 1000,
@@ -124,7 +124,7 @@ Se emite cuando el tenant supera un límite y cambia el modelo de revenue.
 
 **Acción esperada**:
 - JikkoOps: Activar flags de "% de recaudo"
-- CILIN: Preparar cálculo de porcentaje de recaudos
+- SILIN: Preparar cálculo de porcentaje de recaudos
 - Notificación: Enviar email al cliente sobre cambio de modelo
 
 ### 4. flags.changed
@@ -151,7 +151,7 @@ Se emite cuando se activan o desactivan Protected Resources.
                 "codigo_recurso": "REP-002",
                 "nombre": "Reportes avanzados",
                 "tipo": "view",
-                "modulo": "CILIN",
+                "modulo": "SILIN",
                 "accion": "activado",
                 "razon": "Upgrade a Plan Premium"
             }
@@ -165,7 +165,7 @@ Se emite cuando se activan o desactivan Protected Resources.
 ```
 
 **Acción esperada**:
-- CILIN/DOS/SOCIA: Actualizar su caché de flags
+- SILIN/DOS/SOCIA: Actualizar su caché de flags
 - UI: Mostrar/ocultar botones según nuevos flags
 - Auditoría: Registrar quién y por qué se activaron
 
@@ -205,7 +205,7 @@ Se emite cuando se genera una factura.
 ```
 
 **Acción esperada**:
-- CILIN: Registrar factura en sistema de cobro
+- SILIN: Registrar factura en sistema de cobro
 - Email: Enviar factura al cliente
 - Contabilidad: Registrar en sistema de ingresos
 - Auditoría: Log de generación
@@ -283,7 +283,7 @@ Se emite cuando se crea un nuevo usuario administrativo en un tenant.
         "nombre": "Carlos López",
         "roles": ["admin"],
         "permiso_para_modificar_revenue": false,
-        "modulos_acceso": ["CILIN", "DOS", "SOCIA"]
+        "modulos_acceso": ["SILIN", "DOS", "SOCIA"]
     }
 }
 ```
@@ -369,7 +369,7 @@ async function consumeEvents() {
 }
 
 async function handleContractActivated(data) {
-    // Inicializar tenant en CILIN, DOS, SOCIA
+    // Inicializar tenant en SILIN, DOS, SOCIA
     console.log(`Activando servicios para ${data.entity_nombre}`);
     
     // Llamar APIs de módulos

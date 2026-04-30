@@ -33,7 +33,7 @@ Cada Protected Resource debe tener:
 
 ## Inventario por Módulo
 
-### CILIN (Liquidación)
+### SILIN (Liquidación)
 ```
 LIQ-001: Botón Liquidar (button, crítica)
 LIQ-002: Endpoint POST /liquidaciones (endpoint, crítica)

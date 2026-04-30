@@ -7,8 +7,8 @@
 Un sistema modular que permite:
 - **Comercializar servicios digitales** de forma granular (liquidación, documentos, servicio al ciudadano)
 - **Controlar acceso** mediante Protected Resources y Feature Flags
-- **Monetizar flexiblemente** (modelo caute, porcentaje recaudo, por usuario, por expediente, híbrido)
-- **Integrar ecosistema SIGIA** (sincronización bidireccional con CILIN, DOS, SOCIA, IAM)
+- **Monetizar flexiblemente** (modelo modelo-ingresos, porcentaje recaudo, por usuario, por expediente, híbrido)
+- **Integrar ecosistema SIGIA** (sincronización bidireccional con SILIN, DOS, SOCIA, IAM)
 - **Auditar exhaustivamente** (logs inmutables por 7 años - requisito fiscal)
 - **Observabilidad completa** (métricas de costo por cada función)
 
@@ -20,7 +20,7 @@ jikkoops-docs/
 ├── 01-arquitectura/               # Diseño del sistema y conceptos
 ├── 02-procesos/                   # Procesos de negocio
 ├── 03-datos/                      # Capa de datos y modelos
-├── 04-apis/                       # Integración e endpoints REST
+├── 04-apis/                       # Integración y endpoints REST
 ├── 05-modulos-nucleares/          # Módulos core del sistema
 ├── 06-riesgos-y-decisiones/       # Riesgos e hitos arquitectónicos
 └── DOCUMENTACION/                 # Archivos maestros de referencia
@@ -146,8 +146,8 @@ La documentación integra insights de una reunión de 127 minutos con el equipo:
 
 ## 📊 8 Casos de Uso Críticos (Para Validar BD)
 
-1. **CU-001**: Crear contrato caute + porcentaje, generar factura
-2. **CU-002**: Escalado automático cuando se supera límite caute
+1. **CU-001**: Crear contrato modelo-ingresos + porcentaje, generar factura
+2. **CU-002**: Escalado automático cuando se supera límite modelo-ingresos
 3. **CU-003**: MFA en liquidación crítica ($50M+)
 4. **CU-004**: Reporte predictivo: "¿Cuánto dinero falta para pagar contratos?"
 5. **CU-005**: Cambiar Protected Resource sin afectar clientes en producción

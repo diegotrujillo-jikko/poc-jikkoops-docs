@@ -8,7 +8,7 @@
 
 JikkoOps permite:
 - Vender, activar, medir y facturar servicios modulares a diferentes entidades (municipios, gobernaciones, DIAN, etc.)
-- Gestionar contratos y operaciones de múltiples sistemas (CILIN, DOS, SOCIA)
+- Gestionar contratos y operaciones de múltiples sistemas (SILIN, DOS, SOCIA)
 - Controlar acceso a funcionalidades mediante Protected Resources y Tenant Entitlements
 - Monetizar servicios con modelos de revenue flexibles (por expediente, por porcentaje de recaudo, por usuario, híbridos)
 
@@ -29,7 +29,7 @@ JikkoOps permite:
 
 JikkoOps es la capa comercial y operativa de **SIGIA** (Sistema de Gestión Integral Administrativo), que incluye:
 
-- **CILIN**: Módulo de liquidación y facturación
+- **SILIN**: Módulo de liquidación y facturación
 - **DOS**: Gestión documental y archivo
 - **SOCIA**: Servicio al ciudadano y notificaciones
 - **IAM**: Identity and Access Management (gestión transversal de usuarios)
